@@ -1,12 +1,14 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Mail } from "lucide-react"
+import { motion } from "framer-motion"
 
 export default function ContactSection() {
   return (
     <section className="relative z-10 py-24 px-6 bg-[#FFF9F0]">
       <div className="max-w-7xl mx-auto">
         <div className="rounded-3xl bg-white ring-1 ring-[#E5E5E5] p-12 shadow-sm">
-          {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance text-[#3A3A3A]">
               Contact Our Team
@@ -14,8 +16,13 @@ export default function ContactSection() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            {/* Left Column - Contact Form */}
-            <div className="rounded-2xl bg-white text-[#3A3A3A] p-8 shadow-lg ring-1 ring-[#E5E5E5]">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="rounded-2xl bg-white text-[#3A3A3A] p-8 shadow-lg ring-1 ring-[#E5E5E5] hover:shadow-2xl transition-shadow duration-300"
+            >
               <h3 className="text-2xl font-bold mb-6">Send an Inquiry</h3>
               <form className="space-y-6">
                 <div>
@@ -55,17 +62,21 @@ export default function ContactSection() {
                   Send Message
                 </Button>
               </form>
-            </div>
+            </motion.div>
 
-            {/* Right Column - Contact Info */}
-            <div className="space-y-8">
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-8"
+            >
               <div>
                 <p className="text-xl text-[#666666] leading-relaxed text-pretty">
                   For questions about our programs, spiritual guidance, or volunteering opportunities in Chennai, please get in touch. We reply within one business day.
                 </p>
               </div>
 
-              {/* Profile Card */}
               <div className="rounded-2xl bg-white text-[#3A3A3A] p-6 shadow-lg ring-1 ring-[#E5E5E5]">
                 <div className="flex items-center gap-4 mb-4">
                   <img
@@ -83,7 +94,7 @@ export default function ContactSection() {
                   contact@hkmchennai.org
                 </Button>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

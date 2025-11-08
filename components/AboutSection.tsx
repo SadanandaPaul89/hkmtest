@@ -1,3 +1,7 @@
+"use client"
+
+import { motion } from "framer-motion"
+
 export default function AboutSection() {
   return (
     <section className="relative z-10 py-24 px-6 bg-white">
@@ -25,35 +29,61 @@ export default function AboutSection() {
 
           {/* Founder Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="rounded-2xl bg-white ring-1 ring-[#E5E5E5] p-8 shadow-sm">
-              <img
-                src="https://www.elledecoration.vn/wp-content/uploads/2025/03/edam-garden.jpg"
-                alt="His Divine Grace Srila Prabhupada"
-                className="w-full h-64 object-cover rounded-lg mb-6"
-              />
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="group rounded-2xl bg-white ring-1 ring-[#E5E5E5] p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden rounded-lg mb-6"
+              >
+                <img
+                  src="https://www.elledecoration.vn/wp-content/uploads/2025/03/edam-garden.jpg"
+                  alt="His Divine Grace Srila Prabhupada"
+                  className="w-full h-64 object-cover"
+                />
+              </motion.div>
               <div className="bg-[#E8725C]/10 px-3 py-1 rounded-full text-sm text-[#E8725C] font-medium mb-4 inline-block">
                 Humble dedication
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-[#3A3A3A]">His Divine Grace Srila Prabhupada</h3>
+              <h3 className="text-2xl font-bold mb-4 text-[#3A3A3A] group-hover:text-[#E8725C] transition-colors duration-300">His Divine Grace Srila Prabhupada</h3>
               <p className="text-[#666666] leading-relaxed">
                 His Divine Grace Srila Prabhupada is the Acharya or Diksha Guru of the Hare Krishna Movement. He worked relentlessly to impart knowledge, enlighten minds and establish the Hare Krishna movement globally.
               </p>
-            </div>
+            </motion.div>
 
             <div className="space-y-6">
-              <div className="rounded-2xl bg-white ring-1 ring-[#E5E5E5] p-6 shadow-sm">
+              <motion.div 
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                whileHover={{ scale: 1.03, x: 10 }}
+                className="rounded-2xl bg-white ring-1 ring-[#E5E5E5] p-6 shadow-sm hover:shadow-xl hover:ring-[#1B7CB8]/30 transition-all duration-300"
+              >
                 <h4 className="text-lg font-semibold mb-3 text-[#1B7CB8]">Our Mission</h4>
                 <p className="text-[#666666] leading-relaxed">
                   To offer society the opportunity to lead a life of true happiness, good health, peace of mind, and noble qualities—nurtured through God consciousness.
                 </p>
-              </div>
+              </motion.div>
 
-              <div className="rounded-2xl bg-white ring-1 ring-[#E5E5E5] p-6 shadow-sm">
+              <motion.div 
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                whileHover={{ scale: 1.03, x: 10 }}
+                className="rounded-2xl bg-white ring-1 ring-[#E5E5E5] p-6 shadow-sm hover:shadow-xl hover:ring-[#1B7CB8]/30 transition-all duration-300"
+              >
                 <h4 className="text-lg font-semibold mb-3 text-[#1B7CB8]">Our Activities</h4>
                 <p className="text-[#666666] leading-relaxed">
                   We organize Chennai as a spiritual center from every point of view, culturally, scientifically, and philosophically through spiritual and social initiatives.
                 </p>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Plus, Minus } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 
 const faqs = [
   {
@@ -51,24 +52,47 @@ export default function FAQSection() {
             {/* Right Column - FAQ Accordion */}
             <div className="space-y-4">
               {faqs.map((faq, index) => (
-                <div key={index} className="rounded-2xl bg-white ring-1 ring-[#E5E5E5] overflow-hidden">
-                  <button
+                <motion.div 
+                  key={index} 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="rounded-2xl bg-white ring-1 ring-[#E5E5E5] overflow-hidden hover:ring-[#1B7CB8]/30 hover:shadow-lg transition-all duration-300"
+                >
+                  <motion.button
                     onClick={() => toggleFaq(index)}
+                    whileHover={{ x: 5 }}
                     className="w-full p-6 text-left flex items-center justify-between hover:bg-[#FFF9F0]/50 transition-colors"
                   >
                     <h3 className="text-lg font-semibold pr-4 text-[#3A3A3A]">{faq.question}</h3>
-                    {openFaq === index ? (
-                      <Minus className="w-5 h-5 flex-shrink-0 text-[#1B7CB8]" />
-                    ) : (
-                      <Plus className="w-5 h-5 flex-shrink-0 text-[#1B7CB8]" />
+                    <motion.div
+                      animate={{ rotate: openFaq === index ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {openFaq === index ? (
+                        <Minus className="w-5 h-5 flex-shrink-0 text-[#1B7CB8]" />
+                      ) : (
+                        <Plus className="w-5 h-5 flex-shrink-0 text-[#1B7CB8]" />
+                      )}
+                    </motion.div>
+                  </motion.button>
+                  <AnimatePresence>
+                    {openFaq === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-6 pb-6">
+                          <p className="text-[#666666] leading-relaxed">{faq.answer}</p>
+                        </div>
+                      </motion.div>
                     )}
-                  </button>
-                  {openFaq === index && (
-                    <div className="px-6 pb-6">
-                      <p className="text-[#666666] leading-relaxed">{faq.answer}</p>
-                    </div>
-                  )}
-                </div>
+                  </AnimatePresence>
+                </motion.div>
               ))}
             </div>
           </div>

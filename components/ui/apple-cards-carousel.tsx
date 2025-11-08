@@ -49,19 +49,31 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
     if (carouselRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current
       setCanScrollLeft(scrollLeft > 0)
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth)
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
+      
+      // Update current index based on scroll position
+      const cardWidth = isMobile() ? 230 : 384
+      const gap = isMobile() ? 16 : 16
+      const newIndex = Math.round(scrollLeft / (cardWidth + gap))
+      setCurrentIndex(newIndex)
     }
   }
 
   const scrollLeftAction = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -300, behavior: "smooth" })
+      const cardWidth = isMobile() ? 230 : 384
+      const gap = isMobile() ? 16 : 16
+      const scrollAmount = cardWidth + gap
+      carouselRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" })
     }
   }
 
   const scrollRightAction = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: 300, behavior: "smooth" })
+      const cardWidth = isMobile() ? 230 : 384
+      const gap = isMobile() ? 16 : 16
+      const scrollAmount = cardWidth + gap
+      carouselRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" })
     }
   }
 
@@ -163,12 +175,11 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
                 animate={{
                   opacity: 1,
                   y: 0,
-                  transition: {
-                    duration: 0.5,
-                    delay: 0.2 * index,
-                    ease: "easeOut",
-                    once: true,
-                  },
+                }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.2 * index,
+                  ease: "easeOut",
                 }}
                 key={"card" + index}
                 className="rounded-3xl last:pr-[5%] md:last:pr-[33%]"
@@ -180,21 +191,50 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         </div>
 
         {/* Navigation arrows positioned on left and right sides */}
-        <div className="absolute left-4 right-4 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none">
-          <button
-            className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 shadow-lg disabled:opacity-50 pointer-events-auto hover:bg-gray-200 transition-colors"
+        <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none px-4 md:px-8">
+          <motion.button
+            whileHover={{ scale: 1.1, x: -5 }}
+            whileTap={{ scale: 0.9 }}
+            className="relative z-40 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-white shadow-xl disabled:opacity-30 pointer-events-auto hover:bg-[#1B7CB8] hover:text-white transition-all duration-300 disabled:cursor-not-allowed"
             onClick={scrollLeftAction}
             disabled={!canScrollLeft}
           >
-            <IconArrowNarrowLeft className="h-6 w-6 text-gray-500" />
-          </button>
-          <button
-            className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 shadow-lg disabled:opacity-50 pointer-events-auto hover:bg-gray-200 transition-colors"
+            <IconArrowNarrowLeft className="h-6 w-6 md:h-7 md:w-7" />
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.1, x: 5 }}
+            whileTap={{ scale: 0.9 }}
+            className="relative z-40 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-white shadow-xl disabled:opacity-30 pointer-events-auto hover:bg-[#1B7CB8] hover:text-white transition-all duration-300 disabled:cursor-not-allowed"
             onClick={scrollRightAction}
             disabled={!canScrollRight}
           >
-            <IconArrowNarrowRight className="h-6 w-6 text-gray-500" />
-          </button>
+            <IconArrowNarrowRight className="h-6 w-6 md:h-7 md:w-7" />
+          </motion.button>
+        </div>
+        
+        {/* Scroll indicator dots */}
+        <div className="flex justify-center gap-2 mt-6">
+          {items.map((_, idx) => (
+            <button
+              key={`dot-${idx}`}
+              onClick={() => {
+                if (carouselRef.current) {
+                  const cardWidth = isMobile() ? 230 : 384
+                  const gap = isMobile() ? 16 : 16
+                  const scrollPosition = (cardWidth + gap) * idx
+                  carouselRef.current.scrollTo({
+                    left: scrollPosition,
+                    behavior: "smooth",
+                  })
+                }
+              }}
+              className={cn(
+                "h-2 rounded-full transition-all duration-300",
+                Math.abs(currentIndex - idx) <= 1 ? "w-8 bg-[#1B7CB8]" : "w-2 bg-gray-300 hover:bg-gray-400"
+              )}
+              aria-label={`Go to slide ${idx + 1}`}
+            />
+          ))}
         </div>
       </div>
     </CarouselContext.Provider>
@@ -287,29 +327,48 @@ export const Card = ({
       <motion.button
         layoutId={layout ? `card-${card.title}` : undefined}
         onClick={handleOpen}
-        className="relative z-10 flex h-80 w-56 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 md:h-[40rem] md:w-96 dark:bg-neutral-900"
+        whileHover={{ scale: 1.05, rotateY: 5 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="relative z-10 flex h-80 w-56 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 md:h-[40rem] md:w-96 dark:bg-neutral-900 shadow-lg hover:shadow-2xl transition-shadow duration-300"
       >
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-full bg-gradient-to-b from-black/50 via-transparent to-transparent" />
-        <div className="relative z-40 p-8">
+        <motion.div 
+          className="pointer-events-none absolute inset-x-0 top-0 z-30 h-full bg-gradient-to-b from-black/50 via-transparent to-transparent"
+          whileHover={{ opacity: 0.8 }}
+          transition={{ duration: 0.3 }}
+        />
+        <motion.div 
+          className="relative z-40 p-8"
+          whileHover={{ y: -10 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
           <motion.p
             layoutId={layout ? `category-${card.category}` : undefined}
             className="text-left font-sans text-sm font-medium text-white md:text-base"
+            whileHover={{ scale: 1.05 }}
           >
             {card.category}
           </motion.p>
           <motion.p
             layoutId={layout ? `title-${card.title}` : undefined}
             className="mt-2 max-w-xs text-left font-sans text-xl font-semibold [text-wrap:balance] text-white md:text-3xl"
+            whileHover={{ scale: 1.02 }}
           >
             {card.title}
           </motion.p>
-        </div>
-        <Image
-          src={card.src || "/placeholder.svg"}
-          alt={card.title}
-          fill
-          className="absolute inset-0 z-10 object-cover"
-        />
+        </motion.div>
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="absolute inset-0 z-10"
+        >
+          <Image
+            src={card.src || "/placeholder.svg"}
+            alt={card.title}
+            fill
+            className="object-cover"
+          />
+        </motion.div>
       </motion.button>
     </>
   )
