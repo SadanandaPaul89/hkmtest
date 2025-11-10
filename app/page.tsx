@@ -1,5 +1,4 @@
 import HeroSection from "@/components/HeroSection"
-import ProgramsSection from "@/components/ProgramsSection"
 import AboutSection from "@/components/AboutSection"
 import AdditionalProgramsSection from "@/components/AdditionalProgramsSection"
 import FAQSection from "@/components/FAQSection"
@@ -13,7 +12,6 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#FFF9F0] text-[#3A3A3A]">
       <NavbarDemo />
       <HeroSection />
-      <ProgramsSection />
       <AppleCardsCarouselDemo />
       <AboutSection />
       <AdditionalProgramsSection />
