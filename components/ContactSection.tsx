@@ -6,9 +6,9 @@ import { motion } from "framer-motion"
 
 export default function ContactSection() {
   return (
-    <section className="relative z-10 py-24 px-6 bg-[#FFF9F0]">
+    <section className="relative z-10 py-24 px-6 bg-gradient-to-br from-slate-100 to-blue-50 pattern-om">
       <div className="max-w-7xl mx-auto">
-        <div className="rounded-3xl bg-white ring-1 ring-[#E5E5E5] p-12 shadow-sm">
+        <div className="rounded-3xl bg-white/95 backdrop-blur-sm ring-2 ring-[#1B7CB8]/30 p-12 shadow-xl">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance text-[#3A3A3A]">
               Contact Our Team

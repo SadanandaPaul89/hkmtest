@@ -4,9 +4,9 @@ import { motion } from "framer-motion"
 
 export default function AboutSection() {
   return (
-    <section className="relative z-10 py-24 px-6 bg-white">
+    <section className="relative z-10 py-24 px-6 bg-slate-50 pattern-peacock">
       <div className="max-w-7xl mx-auto">
-        <div className="rounded-3xl bg-[#FFF9F0] ring-1 ring-[#E5E5E5] p-12 shadow-sm">
+        <div className="rounded-3xl bg-white/95 backdrop-blur-sm ring-2 ring-blue-200 p-12 shadow-xl">
           {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance text-[#3A3A3A]">

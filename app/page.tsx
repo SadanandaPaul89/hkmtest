@@ -1,23 +1,34 @@
+"use client"
+
 import HeroSection from "@/components/HeroSection"
-import AboutSection from "@/components/AboutSection"
-import AdditionalProgramsSection from "@/components/AdditionalProgramsSection"
 import FAQSection from "@/components/FAQSection"
-import ContactSection from "@/components/ContactSection"
 import FooterSection from "@/components/FooterSection"
 import AppleCardsCarouselDemo from "@/components/apple-cards-carousel-demo"
 import NavbarDemo from "@/components/resizable-navbar-demo"
+import ImageCardsSection from "@/components/ImageCardsSection"
+import ActivitiesShowcase from "@/components/ActivitiesShowcase"
+import ExplorationSection from "@/components/ExplorationSection"
+import Loader from "@/components/Loader"
+import NavigationLoader from "@/components/NavigationLoader"
+import { AnimatePresence } from "framer-motion"
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#FFF9F0] text-[#3A3A3A]">
-      <NavbarDemo />
-      <HeroSection />
-      <AppleCardsCarouselDemo />
-      <AboutSection />
-      <AdditionalProgramsSection />
-      <FAQSection />
-      <ContactSection />
-      <FooterSection />
-    </div>
+    <>
+      <AnimatePresence>
+        <Loader />
+      </AnimatePresence>
+      <NavigationLoader />
+      <div className="min-h-screen bg-white text-slate-800">
+        <NavbarDemo />
+        <HeroSection />
+        <ExplorationSection />
+        <ImageCardsSection />
+        <AppleCardsCarouselDemo />
+        <ActivitiesShowcase />
+        <FAQSection />
+        <FooterSection />
+      </div>
+    </>
   )
 }

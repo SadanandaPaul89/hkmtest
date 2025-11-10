@@ -2,12 +2,14 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useState } from "react"
+import { motion } from "framer-motion"
 
 const youtubeVideos = [
-  "AY5qcIq5u2g",  // Replace with your video IDs
+  "AY5qcIq5u2g",
   "bJsaR9-h26Y",
   "a7GYSJpYLrA",
-  "gTqKCeiGSbk"
+  "gTqKCeiGSbk",
+  "AY5qcIq5u2g"
 ]
 
 export default function HeroSection() {
@@ -60,22 +62,36 @@ export default function HeroSection() {
         <ChevronRight className="w-6 h-6 text-[#1B7CB8]" />
       </button>
 
-      {/* Bottom left navigation with text */}
-      <div className="absolute bottom-12 left-8 z-20 flex gap-3">
-        {youtubeVideos.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`px-4 py-2 rounded-full transition-all border-2 font-semibold text-sm ${
-              index === currentSlide
-                ? "bg-[#1B7CB8] border-[#1B7CB8] text-white"
-                : "bg-white/60 hover:bg-white/80 border-white text-[#3A3A3A]"
-            }`}
-            aria-label={`Go to video ${index + 1}`}
-          >
-            {`Video ${index + 1}`}
-          </button>
-        ))}
+      {/* Bottom navigation with text labels */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 via-black/60 to-transparent backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-8 py-6">
+          <div className="flex items-center justify-center gap-1">
+            {[
+              { label: "Temple Darshan", id: 0 },
+              { label: "Spiritual Programs", id: 1 },
+              { label: "Community Events", id: 2 },
+              { label: "Sacred Festivals", id: 3 },
+              { label: "Daily Worship", id: 4 }
+            ].map((item, index) => (
+              <div key={item.id} className="flex items-center">
+                <button
+                  onClick={() => setCurrentSlide(item.id)}
+                  className={`px-6 py-3 text-sm font-medium transition-all duration-300 hover:text-[#FFB81C] ${
+                    currentSlide === item.id
+                      ? "text-[#FFB81C]"
+                      : "text-white/80"
+                  }`}
+                  aria-label={item.label}
+                >
+                  {item.label}
+                </button>
+                {index < 4 && (
+                  <div className="h-6 w-px bg-white/20" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )

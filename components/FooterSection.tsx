@@ -1,17 +1,27 @@
 import { Button } from "@/components/ui/button"
-import { Compass } from "lucide-react"
+import { MapPin } from "lucide-react"
 
 export default function FooterSection() {
+  const handleLocationClick = () => {
+    window.open("https://maps.google.com/?q=Hare+Krishna+Movement+Chennai", "_blank")
+  }
+
   return (
-    <footer className="relative z-10 py-24 px-6 bg-white">
+    <footer className="relative z-10 py-24 px-6 bg-slate-100 pattern-waves">
       <div className="max-w-7xl mx-auto">
-        <div className="rounded-3xl bg-[#1B7CB8] p-12 shadow-sm">
+        <div className="rounded-3xl bg-gradient-to-br from-[#1B7CB8] to-[#156399] p-12 shadow-xl backdrop-blur-sm">
           {/* Main Footer Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
             {/* Brand Section */}
             <div className="lg:col-span-2">
               <div className="flex items-center gap-2 mb-6">
-                <Compass className="w-6 h-6 text-[#FFB81C]" />
+                <button
+                  onClick={handleLocationClick}
+                  className="hover:scale-110 transition-transform cursor-pointer"
+                  aria-label="View location on map"
+                >
+                  <MapPin className="w-6 h-6 text-[#FFB81C] hover:text-[#E5A519]" />
+                </button>
                 <span className="text-xl font-semibold text-white">Hare Krishna Movement, Chennai</span>
               </div>
               <p className="text-white/90 leading-relaxed text-pretty">

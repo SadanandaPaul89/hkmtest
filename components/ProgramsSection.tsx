@@ -2,11 +2,11 @@ import { Sparkles, ShieldCheck, Wallet, Leaf } from "lucide-react"
 
 export default function ProgramsSection() {
   return (
-    <section className="relative z-10 py-24 px-6 bg-[#FFF9F0]">
+    <section className="relative z-10 py-24 px-6 bg-white pattern-lotus">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
           {/* Gita Life */}
-          <div className="group rounded-2xl bg-white ring-1 ring-[#E5E5E5] p-8 text-center shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out hover:ring-[#1B7CB8]/30 hover:bg-gradient-to-br hover:from-white hover:to-[#1B7CB8]/5">
+          <div className="group rounded-2xl bg-white ring-1 ring-blue-100 p-8 text-center shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out hover:ring-[#1B7CB8] hover:bg-gradient-to-br hover:from-white hover:to-blue-50">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#1B7CB8]/10 ring-1 ring-[#1B7CB8]/20 mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 group-hover:bg-[#1B7CB8]/20">
               <Sparkles className="w-6 h-6 text-[#1B7CB8] group-hover:animate-pulse" />
             </div>
@@ -15,7 +15,7 @@ export default function ProgramsSection() {
           </div>
 
           {/* ICVK (For Kids) */}
-          <div className="group rounded-2xl bg-white ring-1 ring-[#E5E5E5] p-8 text-center shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out hover:ring-[#FFB81C]/30 hover:bg-gradient-to-br hover:from-white hover:to-[#FFB81C]/5">
+          <div className="group rounded-2xl bg-white ring-1 ring-blue-100 p-8 text-center shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out hover:ring-cyan-400 hover:bg-gradient-to-br hover:from-white hover:to-cyan-50">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#FFB81C]/10 ring-1 ring-[#FFB81C]/20 mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 group-hover:bg-[#FFB81C]/20">
               <ShieldCheck className="w-6 h-6 text-[#FFB81C] group-hover:animate-pulse" />
             </div>
@@ -24,7 +24,7 @@ export default function ProgramsSection() {
           </div>
 
           {/* FOLK (For Youth) */}
-          <div className="group rounded-2xl bg-white ring-1 ring-[#E5E5E5] p-8 text-center shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out hover:ring-[#E8725C]/30 hover:bg-gradient-to-br hover:from-white hover:to-[#E8725C]/5">
+          <div className="group rounded-2xl bg-white ring-1 ring-blue-100 p-8 text-center shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out hover:ring-sky-500 hover:bg-gradient-to-br hover:from-white hover:to-sky-50">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#E8725C]/10 ring-1 ring-[#E8725C]/20 mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 group-hover:bg-[#E8725C]/20">
               <Wallet className="w-6 h-6 text-[#E8725C] group-hover:animate-pulse" />
             </div>
@@ -33,7 +33,7 @@ export default function ProgramsSection() {
           </div>
 
           {/* Srila Prabhupada Ashray */}
-          <div className="group rounded-2xl bg-white ring-1 ring-[#E5E5E5] p-8 text-center shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out hover:ring-[#1B7CB8]/30 hover:bg-gradient-to-br hover:from-white hover:to-[#1B7CB8]/5">
+          <div className="group rounded-2xl bg-white ring-1 ring-blue-100 p-8 text-center shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out hover:ring-[#1B7CB8] hover:bg-gradient-to-br hover:from-white hover:to-blue-50">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#1B7CB8]/10 ring-1 ring-[#1B7CB8]/20 mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 group-hover:bg-[#1B7CB8]/20">
               <Leaf className="w-6 h-6 text-[#1B7CB8] group-hover:animate-pulse" />
             </div>

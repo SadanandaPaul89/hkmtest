@@ -35,9 +35,9 @@ export default function FAQSection() {
   }
 
   return (
-    <section className="relative z-10 py-24 px-6 bg-white">
+    <section className="relative z-10 py-24 px-6 bg-white pattern-floral">
       <div className="max-w-7xl mx-auto">
-        <div className="rounded-3xl bg-[#FFF9F0] ring-1 ring-[#E5E5E5] p-12 shadow-sm">
+        <div className="rounded-3xl bg-gradient-to-br from-slate-50 to-blue-50 backdrop-blur-sm ring-2 ring-blue-200 p-12 shadow-xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             {/* Left Column - Title and Description */}
             <div>
