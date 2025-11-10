@@ -9,16 +9,15 @@ import ImageCardsSection from "@/components/ImageCardsSection"
 import ActivitiesShowcase from "@/components/ActivitiesShowcase"
 import ExplorationSection from "@/components/ExplorationSection"
 import Loader from "@/components/Loader"
-import NavigationLoader from "@/components/NavigationLoader"
+import { NavigationLoaderProvider } from "@/components/NavigationLoader"
 import { AnimatePresence } from "framer-motion"
 
 export default function HomePage() {
   return (
-    <>
+    <NavigationLoaderProvider>
       <AnimatePresence>
         <Loader />
       </AnimatePresence>
-      <NavigationLoader />
       <div className="min-h-screen bg-white text-slate-800">
         <NavbarDemo />
         <HeroSection />
@@ -29,6 +28,6 @@ export default function HomePage() {
         <FAQSection />
         <FooterSection />
       </div>
-    </>
+    </NavigationLoaderProvider>
   )
 }
