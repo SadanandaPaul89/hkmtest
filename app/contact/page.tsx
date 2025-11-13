@@ -52,6 +52,7 @@ export default function ContactPage() {
                 <p>India</p>
               </CardContent>
             </Card>
+            </motion.div>
 
             <Card className="border-[#E8725C] border-2">
               <CardHeader className="bg-[#FFF9F0]">
@@ -171,7 +172,7 @@ export default function ContactPage() {
               height="100%"
               frameBorder="0"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.5897394891!2d80.25!3d12.98!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525f5f5f5f5f5f%3A0x5f5f5f5f5f5f5f5f!2sHare%20Krishna%20Movement%20Chennai!5e0!3m2!1sen!2sin!4v1234567890"
-              allowFullScreen=""
+              allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
