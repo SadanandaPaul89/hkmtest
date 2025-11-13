@@ -58,17 +58,18 @@ export default function NavbarDemo() {
   return (
     <Navbar>
       <NavBody>
-        <div className="flex items-center justify-between w-full max-w-7xl mx-auto">
+        <div className="flex items-center justify-between w-full max-w-7xl mx-auto px-2 sm:px-4">
           <CustomNavbarLogo />
           <DesktopNavItems items={navItems} />
-          <div className="flex items-center gap-4 flex-shrink-0">
+          <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
             <NavbarButton
               as="button"
               variant="primary"
-              className="bg-[#1B7CB8] text-white hover:bg-[#156399] shadow-[0_4px_14px_0_rgba(27,124,184,0.4)] hover:shadow-[0_6px_20px_0_rgba(27,124,184,0.6)] transition-all duration-200"
+              className="bg-[#1B7CB8] text-white hover:bg-[#156399] shadow-[0_4px_14px_0_rgba(27,124,184,0.4)] hover:shadow-[0_6px_20px_0_rgba(27,124,184,0.6)] transition-all duration-200 text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-2.5"
               onClick={() => router.push("/donate")}
             >
-              DONATE NOW
+              <span className="hidden sm:inline">DONATE NOW</span>
+              <span className="sm:hidden">DONATE</span>
             </NavbarButton>
           </div>
         </div>
@@ -113,7 +114,7 @@ export default function NavbarDemo() {
                 <Link
                   href={item.link}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block py-2 text-[#FFFFFF] font-medium hover:text-[#FFFFFF] hover:scale-105 transition-all duration-200"
+                  className="block py-2 text-[#3A3A3A] font-medium hover:text-[#1B7CB8] hover:scale-105 transition-all duration-200"
                 >
                   {item.name}
                 </Link>
@@ -192,8 +193,8 @@ const DesktopNavItems = ({
 
 const CustomNavbarLogo = () => {
   return (
-    <Link href="/" className="relative z-20 flex-shrink-0 flex items-center gap-2 px-2 py-1 text-sm font-normal">
-      <img src={logo.src || "/placeholder.svg"} alt="HKM Logo" className="h-10 w-auto" loading="eager" />
+    <Link href="/" className="relative z-20 flex-shrink-0 flex items-center gap-2 px-1 sm:px-2 py-1 text-sm font-normal">
+      <img src={logo.src || "/placeholder.svg"} alt="HKM Logo" className="h-8 sm:h-10 w-auto" loading="eager" />
     </Link>
   )
 }

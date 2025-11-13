@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 
@@ -53,8 +53,64 @@ export default function ExplorationSection() {
     setCurrentIndex(index)
   }
 
+  // Auto-advance slides
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide()
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [currentIndex])
+
+  // Calculate position for each card relative to center
+  const getCardStyle = (index: number) => {
+    const diff = index - currentIndex
+    const absPos = ((diff + explorationImages.length) % explorationImages.length)
+    const position = absPos > explorationImages.length / 2 ? absPos - explorationImages.length : absPos
+
+    // Define styles for each position level
+    const styles: Record<number, any> = {
+      0: { // Center
+        scale: 1,
+        x: '0%',
+        z: 0,
+        opacity: 1,
+        zIndex: 50,
+      },
+      1: { // Right 1
+        scale: 0.85,
+        x: '70%',
+        z: -100,
+        opacity: 0.7,
+        zIndex: 40,
+      },
+      '-1': { // Left 1
+        scale: 0.85,
+        x: '-70%',
+        z: -100,
+        opacity: 0.7,
+        zIndex: 40,
+      },
+      2: { // Right 2
+        scale: 0.7,
+        x: '140%',
+        z: -200,
+        opacity: 0.4,
+        zIndex: 30,
+      },
+      '-2': { // Left 2
+        scale: 0.7,
+        x: '-140%',
+        z: -200,
+        opacity: 0.4,
+        zIndex: 30,
+      }
+    }
+
+    return styles[position] || { scale: 0, x: '0%', z: -300, opacity: 0, zIndex: 0 }
+  }
+
   return (
-    <section className="relative py-20 bg-gradient-to-b from-slate-900 to-slate-800 overflow-hidden">
+    <section className="relative py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-b from-slate-900 to-slate-800 overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-pattern-lotus" />
@@ -67,89 +123,101 @@ export default function ExplorationSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12"
         >
-          <h2 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-wider">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-1 sm:mb-2 md:mb-4 tracking-wider">
             EXPLORATION
           </h2>
-          <p className="text-xl text-white/80">for every spiritual journey</p>
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/80">for every spiritual journey</p>
         </motion.div>
 
-        {/* Main Slider */}
+        {/* 3D Carousel Container */}
         <div className="relative">
-          {/* Image Container */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl"
-          >
-            <Image
-              src={explorationImages[currentIndex].image}
-              alt={explorationImages[currentIndex].title}
-              fill
-              className="object-cover"
-            />
-            
-            {/* Overlay Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          {/* Carousel Viewport */}
+          <div className="relative h-[280px] sm:h-[380px] md:h-[480px] lg:h-[530px] mb-4 sm:mb-6" style={{ perspective: '2000px' }}>
+            {/* All Cards */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              {explorationImages.map((image, index) => {
+                const style = getCardStyle(index)
+                const isCenter = index === currentIndex
+                
+                return (
+                  <motion.div
+                    key={image.id}
+                    className="absolute w-full max-w-[90%] sm:max-w-[85%] md:max-w-[80%] lg:max-w-[75%] h-[250px] sm:h-[350px] md:h-[450px] lg:h-[500px] rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
+                    style={{
+                      zIndex: style.zIndex,
+                    }}
+                    animate={{
+                      scale: style.scale,
+                      x: style.x,
+                      opacity: style.opacity,
+                      rotateY: style.z / 10,
+                    }}
+                    transition={{
+                      duration: 0.7,
+                      ease: [0.32, 0.72, 0, 1],
+                    }}
+                    onClick={() => !isCenter && goToSlide(index)}
+                  >
+                    <Image
+                      src={image.image}
+                      alt={image.title}
+                      fill
+                      className="object-cover"
+                    />
+                    
+                    {/* Overlay Gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-            {/* Content Overlay */}
-            <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-              <motion.h3
-                key={currentIndex}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="text-5xl font-bold mb-2"
-              >
-                {explorationImages[currentIndex].title}
-              </motion.h3>
-              <motion.p
-                key={`desc-${currentIndex}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-xl text-white/90"
-              >
-                {explorationImages[currentIndex].description}
-              </motion.p>
+                    {/* Content Overlay - Only visible on center card */}
+                    {isCenter && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                        className="absolute bottom-0 left-0 right-0 p-4 pb-3 sm:p-6 md:p-8 text-white"
+                      >
+                        <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-1 sm:mb-2">
+                          {image.title}
+                        </h3>
+                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90">
+                          {image.description}
+                        </p>
+                      </motion.div>
+                    )}
+                  </motion.div>
+                )
+              })}
             </div>
 
             {/* Navigation Arrows */}
             <button
               onClick={prevSlide}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm p-3 rounded-full transition-all duration-200 group"
+              className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-[60] bg-white/90 active:bg-white md:hover:bg-white backdrop-blur-sm p-2 sm:p-2.5 md:p-3 rounded-full transition-all duration-200 shadow-lg"
               aria-label="Previous slide"
             >
-              <ChevronLeft className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-slate-800" />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm p-3 rounded-full transition-all duration-200 group"
+              className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-[60] bg-white/90 active:bg-white md:hover:bg-white backdrop-blur-sm p-2 sm:p-2.5 md:p-3 rounded-full transition-all duration-200 shadow-lg"
               aria-label="Next slide"
             >
-              <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-slate-800" />
             </button>
-          </motion.div>
+          </div>
 
-          {/* Thumbnail Navigation */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex justify-center gap-4 mt-8 overflow-visible pb-4 px-4"
-          >
+          {/* Thumbnail Navigation - Desktop only */}
+          <div className="hidden md:flex justify-center gap-1.5">
             {explorationImages.map((image, index) => (
               <button
                 key={image.id}
                 onClick={() => goToSlide(index)}
-                className={`relative flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden transition-all duration-300 ${
+                className={`relative flex-shrink-0 w-6 h-6 rounded-sm overflow-hidden transition-all duration-300 ${
                   currentIndex === index
-                    ? "ring-4 ring-[#FBB201]"
-                    : "ring-2 ring-white/30 hover:ring-white/50 opacity-60 hover:opacity-100"
+                    ? "ring-2 ring-[#FBB201] opacity-100 scale-110"
+                    : "ring-1 ring-white/30 opacity-60 hover:opacity-100 hover:scale-105"
                 }`}
               >
                 <Image
@@ -159,22 +227,6 @@ export default function ExplorationSection() {
                   className="object-cover"
                 />
               </button>
-            ))}
-          </motion.div>
-
-          {/* Dot Indicators */}
-          <div className="flex justify-center gap-2 mt-6">
-            {explorationImages.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  currentIndex === index
-                    ? "w-8 bg-[#FBB201]"
-                    : "w-2 bg-white/40 hover:bg-white/60"
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
             ))}
           </div>
         </div>

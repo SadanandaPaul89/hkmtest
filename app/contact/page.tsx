@@ -1,25 +1,33 @@
+"use client"
+
+import { motion } from "framer-motion"
 import NavbarDemo from "@/components/resizable-navbar-demo"
 import FooterSection from "@/components/FooterSection"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-[#FFF9F0] text-[#3A3A3A]">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 text-[#3A3A3A]">
       <NavbarDemo />
 
       {/* Hero Section */}
       <section
-        className="relative py-20 px-4 md:px-8 bg-cover bg-center bg-no-repeat"
+        className="relative py-32 px-4 md:px-8 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "url('/placeholder.svg?key=contact')",
           backgroundAttachment: "fixed",
         }}
       >
-        <div className="absolute inset-0 bg-black/40"></div>
-        <div className="relative max-w-6xl mx-auto text-center text-white">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-balance">Contact Us</h1>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/40"></div>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative max-w-6xl mx-auto text-center text-white"
+        >
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance">Contact Us</h1>
           <p className="text-xl md:text-2xl text-gray-100">We'd Love to Hear From You</p>
-        </div>
+        </motion.div>
       </section>
 
       {/* Main Content */}
@@ -27,7 +35,13 @@ export default function ContactPage() {
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           {/* Contact Information */}
           <div className="space-y-6">
-            <Card className="border-[#FFB81C] border-2">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <Card className="border-[#FFB81C] border-2 hover:shadow-xl transition-shadow duration-300">
               <CardHeader className="bg-[#FFF9F0]">
                 <CardTitle className="text-[#1B7CB8]">Address</CardTitle>
               </CardHeader>

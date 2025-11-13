@@ -146,7 +146,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 
   return (
     <CarouselContext.Provider value={{ onCardClose: handleCardClose, currentIndex }}>
-      <div className="relative w-full">
+      <div className="relative w-full pb-16">
         <div
           className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth py-10 [scrollbar-width:none] md:py-20 cursor-grab active:cursor-grabbing select-none"
           ref={carouselRef}
@@ -211,31 +211,31 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
             <IconArrowNarrowRight className="h-6 w-6 md:h-7 md:w-7" />
           </motion.button>
         </div>
-        
-        {/* Scroll indicator dots */}
-        <div className="flex justify-center gap-2 mt-6">
-          {items.map((_, idx) => (
-            <button
-              key={`dot-${idx}`}
-              onClick={() => {
-                if (carouselRef.current) {
-                  const cardWidth = isMobile() ? 230 : 384
-                  const gap = isMobile() ? 16 : 16
-                  const scrollPosition = (cardWidth + gap) * idx
-                  carouselRef.current.scrollTo({
-                    left: scrollPosition,
-                    behavior: "smooth",
-                  })
-                }
-              }}
-              className={cn(
-                "h-2 rounded-full transition-all duration-300",
-                Math.abs(currentIndex - idx) <= 1 ? "w-8 bg-[#1B7CB8]" : "w-2 bg-gray-300 hover:bg-gray-400"
-              )}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
-        </div>
+      </div>
+      
+      {/* Scroll indicator dots - positioned at bottom of parent container */}
+      <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 pb-4">
+        {items.map((_, idx) => (
+          <button
+            key={`dot-${idx}`}
+            onClick={() => {
+              if (carouselRef.current) {
+                const cardWidth = isMobile() ? 230 : 384
+                const gap = isMobile() ? 16 : 16
+                const scrollPosition = (cardWidth + gap) * idx
+                carouselRef.current.scrollTo({
+                  left: scrollPosition,
+                  behavior: "smooth",
+                })
+              }
+            }}
+            className={cn(
+              "h-2 rounded-full transition-all duration-300 z-50",
+              Math.abs(currentIndex - idx) <= 1 ? "w-8 bg-[#1B7CB8]" : "w-2 bg-gray-300 hover:bg-gray-400"
+            )}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
       </div>
     </CarouselContext.Provider>
   )

@@ -3,7 +3,6 @@
 import HeroSection from "@/components/HeroSection"
 import FAQSection from "@/components/FAQSection"
 import FooterSection from "@/components/FooterSection"
-import AppleCardsCarouselDemo from "@/components/apple-cards-carousel-demo"
 import NavbarDemo from "@/components/resizable-navbar-demo"
 import ImageCardsSection from "@/components/ImageCardsSection"
 import ActivitiesShowcase from "@/components/ActivitiesShowcase"
@@ -18,12 +17,11 @@ export default function HomePage() {
       <AnimatePresence>
         <Loader />
       </AnimatePresence>
-      <div className="min-h-screen bg-white text-slate-800">
+      <div className="min-h-screen bg-white text-slate-800 overflow-x-hidden max-w-full">
         <NavbarDemo />
         <HeroSection />
         <ExplorationSection />
         <ImageCardsSection />
-        <AppleCardsCarouselDemo />
         <ActivitiesShowcase />
         <FAQSection />
         <FooterSection />

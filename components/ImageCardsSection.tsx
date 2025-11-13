@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
+import { useState } from "react"
 
 const cards = [
   {
@@ -36,20 +37,25 @@ const cards = [
 ]
 
 export default function ImageCardsSection() {
+  const [activeCard, setActiveCard] = useState<number | null>(null)
+
   return (
-    <section className="relative z-10 py-16 px-6 bg-white">
+    <section className="relative z-10 py-8 sm:py-12 md:py-16 px-4 sm:px-6 bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="overflow-x-auto scrollbar-hide">
-          <div className="flex gap-6 pb-4 min-w-max lg:min-w-0 lg:grid lg:grid-cols-4">
-            {cards.map((card, index) => (
-              <motion.div
-                key={card.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative w-72 h-96 lg:w-full rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
-              >
+        {/* Mobile: Stack vertically, Tablet: 2 cols, Desktop: 4 cols */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {cards.map((card, index) => (
+            <motion.div
+              key={card.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              onClick={() => setActiveCard(activeCard === card.id ? null : card.id)}
+              className={`group relative h-80 sm:h-96 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg transition-all duration-500 cursor-pointer ${
+                activeCard === card.id ? 'shadow-2xl scale-[1.02]' : 'hover:shadow-2xl'
+              }`}
+            >
                 {/* Background Image */}
                 <div className="absolute inset-0">
                   <img
@@ -62,19 +68,29 @@ export default function ImageCardsSection() {
                 {/* Gradient Overlay (always visible) */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
-                {/* Dark Overlay on Hover */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/70 backdrop-blur-0 group-hover:backdrop-blur-sm transition-all duration-300" />
+                {/* Dark Overlay - Active on tap/hover */}
+                <div className={`absolute inset-0 transition-all duration-300 ${
+                  activeCard === card.id 
+                    ? 'bg-black/70 backdrop-blur-sm' 
+                    : 'bg-black/0 backdrop-blur-0 md:group-hover:bg-black/70 md:group-hover:backdrop-blur-sm'
+                }`} />
 
                 {/* Content */}
-                <div className="absolute inset-0 flex flex-col justify-end p-6 z-10">
+                <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6 z-10">
                   {/* Title (always visible) */}
-                  <h3 className="text-2xl font-bold text-white mb-2 transition-all duration-300 group-hover:mb-4">
+                  <h3 className={`text-xl sm:text-2xl font-bold text-white transition-all duration-300 ${
+                    activeCard === card.id ? 'mb-3 sm:mb-4' : 'mb-2 md:group-hover:mb-3 md:group-hover:mb-4'
+                  }`}>
                     {card.title}
                   </h3>
 
-                  {/* Description and Button (visible on hover) */}
-                  <div className="max-h-0 opacity-0 overflow-hidden group-hover:max-h-40 group-hover:opacity-100 transition-all duration-500 ease-out">
-                    <p className="text-white text-sm mb-4 leading-relaxed">
+                  {/* Description and Button (visible on tap/hover) */}
+                  <div className={`overflow-hidden transition-all duration-500 ease-out ${
+                    activeCard === card.id 
+                      ? 'max-h-32 sm:max-h-40 opacity-100' 
+                      : 'max-h-0 opacity-0 md:group-hover:max-h-32 md:group-hover:max-h-40 md:group-hover:opacity-100'
+                  }`}>
+                    <p className="text-white text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">
                       {card.description}
                     </p>
                     <Link href={card.url}>
@@ -85,21 +101,10 @@ export default function ImageCardsSection() {
                     </Link>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+            </motion.div>
+          ))}
         </div>
       </div>
-
-      <style jsx global>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </section>
   )
 }
