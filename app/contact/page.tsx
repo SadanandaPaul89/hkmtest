@@ -25,8 +25,8 @@ export default function ContactPage() {
           transition={{ duration: 0.8 }}
           className="relative max-w-6xl mx-auto text-center text-white"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance">Contact Us</h1>
-          <p className="text-xl md:text-2xl text-gray-100">We'd Love to Hear From You</p>
+          <h1 className="heading-1 mb-6 text-balance text-white">Contact Us</h1>
+          <p className="body-large text-gray-100">We'd Love to Hear From You</p>
         </motion.div>
       </section>
 
@@ -111,7 +111,7 @@ export default function ContactPage() {
 
           {/* Contact Form */}
           <div className="bg-white rounded-lg p-8 border-l-4 border-[#FFB81C]">
-            <h3 className="text-2xl font-bold mb-6 text-[#1B7CB8]">Send us a Message</h3>
+            <h3 className="heading-3 mb-6 text-[#1B7CB8]">Send us a Message</h3>
             <form className="space-y-4">
               <div>
                 <label className="block text-[#3A3A3A] font-semibold mb-2">Name</label>
@@ -165,7 +165,7 @@ export default function ContactPage() {
 
         {/* Map Section */}
         <div className="mb-12">
-          <h3 className="text-2xl font-bold mb-6 text-[#1B7CB8]">Find Us on the Map</h3>
+          <h3 className="heading-3 mb-6 text-[#1B7CB8]">Find Us on the Map</h3>
           <div className="w-full h-96 bg-gray-300 rounded-lg overflow-hidden border-2 border-[#FFB81C]">
             <iframe
               width="100%"

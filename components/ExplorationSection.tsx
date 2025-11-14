@@ -8,32 +8,32 @@ import Image from "next/image"
 const explorationImages = [
   {
     id: 1,
-    title: "Delhi",
-    image: "/placeholder.jpg",
+    title: "Sri Krishna Janmashtami",
+    image: "/assets/Sri-krishna-Janmashtami.jpg",
     description: "Explore the spiritual heritage"
   },
   {
     id: 2,
-    title: "Vrindavan",
-    image: "/placeholder.jpg",
+    title: "Vyasa Puja",
+    image: "/assets/VyasaPuja2019-16.jpg",
     description: "Land of Lord Krishna"
   },
   {
     id: 3,
-    title: "Mayapur",
-    image: "/placeholder.jpg",
+    title: "Balarama Jayanthi",
+    image: "/assets/BalaramaJayanthi19-39.jpg",
     description: "Spiritual capital of the world"
   },
   {
     id: 4,
-    title: "Puri",
-    image: "/placeholder.jpg",
+    title: "Govardhan Puja",
+    image: "/assets/Govardhna-puja.JPG",
     description: "Home of Lord Jagannath"
   },
   {
     id: 5,
-    title: "Dwarka",
-    image: "/placeholder.jpg",
+    title: "Narsimha Jayanti",
+    image: "/assets/Narasimha Jayanti.JPG",
     description: "Ancient kingdom of Krishna"
   }
 ]
@@ -125,10 +125,10 @@ export default function ExplorationSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-1 sm:mb-2 md:mb-4 tracking-wider">
+          <h2 className="heading-2 text-white mb-1 sm:mb-2 md:mb-4 tracking-wider">
             EXPLORATION
           </h2>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/80">for every spiritual journey</p>
+          <p className="body-large text-white/80">for every spiritual journey</p>
         </motion.div>
 
         {/* 3D Carousel Container */}
@@ -178,10 +178,10 @@ export default function ExplorationSection() {
                         transition={{ delay: 0.3, duration: 0.5 }}
                         className="absolute bottom-0 left-0 right-0 p-4 pb-3 sm:p-6 md:p-8 text-white"
                       >
-                        <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-1 sm:mb-2">
+                        <h3 className="heading-3 text-white mb-1 sm:mb-2">
                           {image.title}
                         </h3>
-                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90">
+                        <p className="body-large text-white/90">
                           {image.description}
                         </p>
                       </motion.div>

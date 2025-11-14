@@ -1,7 +1,6 @@
 "use client"
 
 import HeroSection from "@/components/HeroSection"
-import FAQSection from "@/components/FAQSection"
 import FooterSection from "@/components/FooterSection"
 import NavbarDemo from "@/components/resizable-navbar-demo"
 import ImageCardsSection from "@/components/ImageCardsSection"
@@ -23,7 +22,6 @@ export default function HomePage() {
         <ExplorationSection />
         <ImageCardsSection />
         <ActivitiesShowcase />
-        <FAQSection />
         <FooterSection />
       </div>
     </NavigationLoaderProvider>

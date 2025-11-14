@@ -41,10 +41,10 @@ export default function FAQSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             {/* Left Column - Title and Description */}
             <div>
-              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance text-[#3A3A3A]">
+              <h2 className="heading-2 tracking-tight mb-6 text-balance text-[#3A3A3A]">
                 Frequently Asked Questions
               </h2>
-              <p className="text-xl text-[#666666] leading-relaxed text-pretty">
+              <p className="body-large text-[#666666] text-pretty">
                 Everything you need to know about joining our spiritual community and participating in our programs in Chennai.
               </p>
             </div>
@@ -65,7 +65,7 @@ export default function FAQSection() {
                     whileHover={{ x: 5 }}
                     className="w-full p-6 text-left flex items-center justify-between hover:bg-[#FFF9F0]/50 transition-colors"
                   >
-                    <h3 className="text-lg font-semibold pr-4 text-[#3A3A3A]">{faq.question}</h3>
+                    <h3 className="heading-3 pr-4 text-[#3A3A3A]">{faq.question}</h3>
                     <motion.div
                       animate={{ rotate: openFaq === index ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
@@ -87,7 +87,7 @@ export default function FAQSection() {
                         className="overflow-hidden"
                       >
                         <div className="px-6 pb-6">
-                          <p className="text-[#666666] leading-relaxed">{faq.answer}</p>
+                          <p className="body-regular text-[#666666]">{faq.answer}</p>
                         </div>
                       </motion.div>
                     )}

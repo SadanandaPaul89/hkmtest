@@ -4,30 +4,30 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useState } from "react"
 import { motion } from "framer-motion"
 
-const youtubeVideos = [
-  "AY5qcIq5u2g",
-  "bJsaR9-h26Y",
-  "a7GYSJpYLrA",
-  "gTqKCeiGSbk",
-  "dQw4w9WgXcQ"
+const videos = [
+  { type: "cloudinary", id: "Temple-Darshan-1_nutfl3", cloudName: "dmyzn29mc" },
+  { type: "youtube", id: "bJsaR9-h26Y" },
+  { type: "cloudinary", id: "Sri_Krishna_Janmashtami_2025_Highlights___HKM_Chennai_Grand_Celebrations_1_ohsc8z", cloudName: "dmyzn29mc" },
+  { type: "cloudinary", id: "Sri_Krishna_Janmashtami_2025_Highlights___HKM_Chennai_Grand_Celebrations_1_ohsc8z", cloudName: "dmyzn29mc" },
+  { type: "youtube", id: "dQw4w9WgXcQ" }
 ]
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % youtubeVideos.length)
+    setCurrentSlide((prev) => (prev + 1) % videos.length)
   }
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + youtubeVideos.length) % youtubeVideos.length)
+    setCurrentSlide((prev) => (prev - 1 + videos.length) % videos.length)
   }
 
   return (
     <div className="relative h-screen w-screen max-w-full overflow-hidden">
-      {/* Background YouTube Video */}
+      {/* Background Videos */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        {youtubeVideos.map((id, idx) => (
+        {videos.map((video, idx) => (
           <div
             key={`video-${idx}`}
             className={`absolute inset-0 transition-opacity duration-1000 ${
@@ -35,23 +35,48 @@ export default function HeroSection() {
             }`}
           >
             <div className="relative w-full h-full bg-slate-900 overflow-hidden">
-              {/* Force video to fill entire screen on all devices */}
-              <iframe
-                className="absolute pointer-events-none"
-                style={{
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  width: '300vw',
-                  height: '100vh',
-                  minWidth: '177.78vh',
-                  minHeight: '100vh',
-                }}
-                src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=${id}&modestbranding=1&rel=0&playsinline=1&enablejsapi=1`}
-                title={`YouTube video ${idx + 1}`}
-                loading={idx === 0 ? "eager" : "lazy"}
-                allow="autoplay; fullscreen; accelerometer; gyroscope; picture-in-picture"
-              ></iframe>
+              {/* Render Cloudinary or YouTube video */}
+              {video.type === "cloudinary" ? (
+                <video
+                  className="absolute pointer-events-none"
+                  style={{
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                >
+                  <source
+                    src={`https://res.cloudinary.com/${video.cloudName}/video/upload/${video.id}.mp4`}
+                    type="video/mp4"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <iframe
+                  className="absolute pointer-events-none"
+                  style={{
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '300vw',
+                    height: '100vh',
+                    minWidth: '177.78vh',
+                    minHeight: '100vh',
+                  }}
+                  src={`https://www.youtube.com/embed/${video.id}?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=${video.id}&modestbranding=1&rel=0&playsinline=1&enablejsapi=1`}
+                  title={`YouTube video ${idx + 1}`}
+                  loading={idx === 0 ? "eager" : "lazy"}
+                  allow="autoplay; fullscreen; accelerometer; gyroscope; picture-in-picture"
+                ></iframe>
+              )}
             </div>
           </div>
         ))}

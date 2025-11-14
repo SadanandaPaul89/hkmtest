@@ -31,14 +31,14 @@ export default function Loader() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative w-80"
+          className="relative w-56 sm:w-72 md:w-80"
         >
           {!imageError ? (
             <Image
               src="/hkmc-banner.svg"
               alt="Hare Krishna Movement Chennai"
-              width={500}
-              height={500}
+              width={200}
+              height={200}
               className="w-full h-auto"
               priority
               onError={() => setImageError(true)}
@@ -99,7 +99,7 @@ export default function Loader() {
           </div>
 
           {/* Progress bar */}
-          <div className="w-80 h-1 bg-white/20 rounded-full overflow-hidden">
+          <div className="w-64 sm:w-72 md:w-80 h-1 bg-white/20 rounded-full overflow-hidden">
             <motion.div
               initial={{ width: "0%" }}
               animate={{ width: "100%" }}

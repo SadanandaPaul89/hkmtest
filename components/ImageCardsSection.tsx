@@ -40,10 +40,24 @@ export default function ImageCardsSection() {
   const [activeCard, setActiveCard] = useState<number | null>(null)
 
   return (
-    <section className="relative z-10 py-8 sm:py-12 md:py-16 px-4 sm:px-6 bg-white">
+    <section className="relative z-10 py-8 sm:py-12 md:py-16 bg-white">
       <div className="max-w-7xl mx-auto">
-        {/* Mobile: Stack vertically, Tablet: 2 cols, Desktop: 4 cols */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        {/* Section Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8 sm:mb-10 md:mb-12 px-4"
+        >
+          <h2 className="heading-2 tracking-tight text-slate-800 mb-3 sm:mb-4">
+            DISCOVER
+          </h2>
+          <p className="body-large text-slate-600">Explore our offerings</p>
+        </motion.div>
+
+        {/* Mobile: Horizontal scroll, Tablet: 2 cols, Desktop: 4 cols */}
+        <div className="flex overflow-x-auto gap-4 px-4 sm:px-6 pb-4 snap-x snap-mandatory scrollbar-hide sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 sm:overflow-visible">
           {cards.map((card, index) => (
             <motion.div
               key={card.id}
@@ -52,8 +66,8 @@ export default function ImageCardsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               onClick={() => setActiveCard(activeCard === card.id ? null : card.id)}
-              className={`group relative h-80 sm:h-96 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg transition-all duration-500 cursor-pointer ${
-                activeCard === card.id ? 'shadow-2xl scale-[1.02]' : 'hover:shadow-2xl'
+              className={`group relative h-[420px] sm:h-[480px] w-[85vw] sm:w-auto flex-shrink-0 snap-center rounded-xl sm:rounded-2xl overflow-hidden shadow-lg transition-all duration-500 cursor-pointer ${
+                activeCard === card.id ? 'shadow-2xl sm:scale-[1.02]' : 'sm:hover:shadow-2xl'
               }`}
             >
                 {/* Background Image */}
@@ -78,7 +92,7 @@ export default function ImageCardsSection() {
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6 z-10">
                   {/* Title (always visible) */}
-                  <h3 className={`text-xl sm:text-2xl font-bold text-white transition-all duration-300 ${
+                  <h3 className={`heading-3 text-white transition-all duration-300 ${
                     activeCard === card.id ? 'mb-3 sm:mb-4' : 'mb-2 md:group-hover:mb-3 md:group-hover:mb-4'
                   }`}>
                     {card.title}
@@ -87,14 +101,14 @@ export default function ImageCardsSection() {
                   {/* Description and Button (visible on tap/hover) */}
                   <div className={`overflow-hidden transition-all duration-500 ease-out ${
                     activeCard === card.id 
-                      ? 'max-h-32 sm:max-h-40 opacity-100' 
-                      : 'max-h-0 opacity-0 md:group-hover:max-h-32 md:group-hover:max-h-40 md:group-hover:opacity-100'
+                      ? 'max-h-48 opacity-100' 
+                      : 'max-h-0 opacity-0 md:group-hover:max-h-48 md:group-hover:opacity-100'
                   }`}>
-                    <p className="text-white text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">
+                    <p className="body-regular text-white mb-4 leading-relaxed">
                       {card.description}
                     </p>
                     <Link href={card.url}>
-                      <button className="inline-flex items-center gap-2 bg-white text-[#1B7CB8] px-6 py-2.5 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300">
+                      <button className="inline-flex items-center gap-2 bg-white text-[#1B7CB8] px-6 py-2.5 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 mb-2">
                         Explore Now
                         <ArrowRight className="w-4 h-4" />
                       </button>

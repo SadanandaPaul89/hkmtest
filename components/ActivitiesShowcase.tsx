@@ -9,42 +9,42 @@ const activities = [
     id: 1,
     title: "Spiritual Discourses",
     description: "Prahlad Maharaj states in Srimad Bhagavatam that of the nine process of Devotional Service",
-    image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2070&auto=format&fit=crop",
+    image: "/assets/SrimadBhagavatam-Lecture.jpg",
     link: "/activities/spiritual-discourses"
   },
   {
     id: 2,
-    title: "Youth Empowerment",
+    title: "Youth Club",
     description: "FOLK – Youth Empowerment Club aimed at crystallizing the formative phase of the younger generation",
-    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=2032&auto=format&fit=crop",
+    image: "/assets/Man-Slider.png",
     link: "/activities/folk"
   },
   {
     id: 3,
-    title: "Spiritual Knowledge",
+    title: "Distribution of Spiritual Knowledge",
     description: "Srila Prabhupada presents Krishna consciousness in a very simple and practical way in his books",
-    image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=2028&auto=format&fit=crop",
+    image: "/assets/Spritiual-main.jpg",
     link: "/activities/distribution"
   },
   {
     id: 4,
     title: "Cultural Festival",
     description: "Hare Krishna Movement Chennai celebrated following cultural festival with great enthusiasm",
-    image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=2070&auto=format&fit=crop",
+    image: "/assets/cultutral-festival.JPG",
     link: "/activities/festivals"
   },
   {
     id: 5,
     title: "Sunday Retreats",
     description: "Make your holiday a holy day. Sunday Festival is a unique program to surcharge you spiritually",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop",
+    image: "/assets/Sunday-retreat.jpg",
     link: "/activities/sunday-retreats"
   },
   {
     id: 6,
     title: "Yuga Dharma",
     description: "Sankirtana Yajna means congregational chanting of the holy names of the Supreme Lord",
-    image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=2070&auto=format&fit=crop",
+    image: "/assets/Yugadharma.jpg",
     link: "/activities/yuga-dharma"
   },
   {
@@ -79,10 +79,10 @@ const ActivityCard = ({ activity }: { activity: typeof activities[0] }) => {
         
         {/* Content */}
         <div className="absolute inset-0 z-20 flex flex-col justify-end p-4 sm:p-6 md:p-8">
-          <h3 className="text-lg sm:text-2xl md:text-4xl font-bold text-white mb-2 sm:mb-3 md:mb-4 uppercase tracking-wide leading-tight">
+          <h3 className="heading-3 text-white mb-2 sm:mb-3 md:mb-4 uppercase tracking-wide">
             {activity.title}
           </h3>
-          <p className="text-xs sm:text-sm md:text-base text-white/90 leading-relaxed mb-3 sm:mb-4 md:mb-6 line-clamp-2">
+          <p className="body-regular text-white/90 mb-3 sm:mb-4 md:mb-6 line-clamp-2">
             {activity.description}
           </p>
           <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-white/25 backdrop-blur-md px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-full text-white font-semibold text-xs sm:text-sm md:text-base group-hover:bg-[#1B7CB8] transition-all duration-300 w-fit">
@@ -98,10 +98,32 @@ const ActivityCard = ({ activity }: { activity: typeof activities[0] }) => {
 }
 
 export default function ActivitiesShowcase() {
-  const [isPaused, setIsPaused] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
+  const controls = useAnimation()
 
   // Duplicate activities for infinite scroll
   const duplicatedActivities = [...activities, ...activities]
+
+  // Auto-scroll effect
+  useEffect(() => {
+    if (!isDragging) {
+      controls.start({
+        x: [0, -2800],
+        transition: {
+          duration: 30,
+          ease: "linear",
+          repeat: Infinity,
+          repeatType: "loop",
+        }
+      })
+    } else {
+      controls.stop()
+    }
+
+    return () => {
+      controls.stop()
+    }
+  }, [isDragging, controls])
 
   return (
     <section className="relative py-12 sm:py-16 md:py-24 bg-gradient-to-br from-slate-50 via-white to-slate-100 overflow-hidden">
@@ -112,39 +134,45 @@ export default function ActivitiesShowcase() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-800 mb-3 sm:mb-4"
+          className="heading-2 tracking-tight text-slate-800 mb-3 sm:mb-4"
         >
           ACTIVITIES
         </motion.h2>
-        <p className="text-base sm:text-lg md:text-xl text-slate-600 font-medium">Explore our spiritual programs</p>
+        <p className="body-large text-slate-600">Explore our spiritual programs</p>
       </div>
 
-      {/* Auto-scrolling Cards */}
-      <div 
-        className="relative"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        <div className="flex gap-4 sm:gap-6 md:gap-10">
-          <motion.div 
-            className="flex gap-4 sm:gap-6 md:gap-10 min-w-max"
-            animate={{
-              x: isPaused ? undefined : [0, -2800],
-            }}
-            transition={{
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 30,
-                ease: "linear",
-              },
-            }}
-          >
-            {duplicatedActivities.map((activity, index) => (
-              <ActivityCard key={`${activity.id}-${index}`} activity={activity} />
-            ))}
-          </motion.div>
-        </div>
+      {/* Draggable Auto-scrolling Cards */}
+      <div className="relative cursor-grab active:cursor-grabbing">
+        <motion.div 
+          className="flex gap-4 sm:gap-6 md:gap-10 min-w-max"
+          drag="x"
+          dragConstraints={{ left: -2800, right: 0 }}
+          dragElastic={0.1}
+          dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+          animate={controls}
+          onDragStart={() => {
+            setIsDragging(true)
+            controls.stop()
+          }}
+          onDragEnd={() => {
+            setIsDragging(false)
+          }}
+          whileTap={{ cursor: "grabbing" }}
+        >
+          {duplicatedActivities.map((activity, index) => (
+            <div 
+              key={`${activity.id}-${index}`}
+              onClick={(e) => {
+                if (isDragging) {
+                  e.preventDefault()
+                  e.stopPropagation()
+                }
+              }}
+            >
+              <ActivityCard activity={activity} />
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   )

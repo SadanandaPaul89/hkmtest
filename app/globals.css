@@ -1,9 +1,43 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Import Google Fonts - Typography System */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600&display=swap');
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Typography Scale */
+  --font-heading: 'Crimson Pro', serif;
+  --font-body: 'Work Sans', sans-serif;
+  
+  /* Font Sizes - Mobile First */
+  --text-h1: 2.25rem;
+  --text-h2: 1.875rem;
+  --text-h3: 1.5rem;
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+  --text-body-sm: 0.875rem;
+  
+  /* Line Heights */
+  --leading-tight: 1.1;
+  --leading-snug: 1.2;
+  --leading-normal: 1.3;
+  --leading-relaxed: 1.7;
+  --leading-loose: 1.6;
+  
+  /* Typography Colors */
+  --text-primary: #2d2d2d;
+  --text-secondary: #525252;
+  --text-muted: #737373;
+  --text-inverse: #fafafa;
+  
+  /* Spacing */
+  --space-section: 5rem;
+  --space-heading: 3em;
+  --space-paragraph: 1.75em;
+
   /* Brand Colors */
   --ocean-blue: #1b7cb8;
   --sunrise-gold: #ffb81c;
@@ -89,6 +123,19 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
+/* Desktop Breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --text-h1: 3.75rem;
+    --text-h2: 2.75rem;
+    --text-h3: 2rem;
+    --text-body-lg: 1.25rem;
+    --text-body: 1.125rem;
+    --text-body-sm: 0.9375rem;
+    --space-section: 7rem;
+  }
+}
+
 @theme inline {
   /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
@@ -135,6 +182,88 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Typography Classes */
+  h1, .heading-1 {
+    font-family: var(--font-heading);
+    font-size: var(--text-h1);
+    font-weight: 500;
+    line-height: var(--leading-tight);
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+  }
+
+  h2, .heading-2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-h2);
+    font-weight: 500;
+    line-height: var(--leading-snug);
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+  }
+
+  h3, .heading-3 {
+    font-family: var(--font-heading);
+    font-size: var(--text-h3);
+    font-weight: 500;
+    line-height: var(--leading-normal);
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+  }
+
+  .body-large {
+    font-family: var(--font-body);
+    font-size: var(--text-body-lg);
+    font-weight: 400;
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+  }
+
+  .body-regular, p {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 400;
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+  }
+
+  .body-small {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    font-weight: 400;
+    line-height: var(--leading-loose);
+    color: var(--text-muted);
+  }
+  
+  /* Layout Utilities */
+  .section-spacing {
+    margin-top: var(--space-section);
+    margin-bottom: var(--space-section);
+  }
+
+  .heading-spacing {
+    margin-top: var(--space-heading);
+    margin-bottom: 0.875em;
+  }
+
+  .paragraph-spacing {
+    margin-bottom: var(--space-paragraph);
+  }
+
+  .max-reading-width {
+    max-width: 65ch;
+  }
+  
+  /* Footer compact spacing override */
+  footer a,
+  footer li,
+  footer h3 {
+    line-height: 1 !important;
   }
 }
 
