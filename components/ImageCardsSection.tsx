@@ -41,15 +41,7 @@ export default function ImageCardsSection() {
 
   return (
     <section className="relative z-10 py-8 sm:py-12 md:py-16 bg-white overflow-x-hidden overflow-y-hidden">
-      {/* Mandala pattern backgrounds */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 left-10 w-60 h-60 opacity-3">
-          <img src="/assets/BlackWhiteMandalaPattern5.jpg" alt="" className="w-full h-full object-contain rotate-90" />
-        </div>
-        <div className="absolute bottom-10 right-10 w-52 h-52 opacity-4">
-          <img src="/assets/BlackWhiteMandalaPattern6.jpg" alt="" className="w-full h-full object-contain -rotate-12" />
-        </div>
-      </div>
+      {/* Mandala pattern backgrounds - removed for performance */}
       <div className="max-w-7xl mx-auto">
         {/* Section Title */}
         <motion.div
@@ -84,6 +76,10 @@ export default function ImageCardsSection() {
                   <img
                     src={card.image}
                     alt={card.title}
+                    loading={index < 2 ? "eager" : "lazy"}
+                    width="420"
+                    height="480"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 </div>

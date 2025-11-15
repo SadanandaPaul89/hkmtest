@@ -11,7 +11,7 @@ export default function Loader() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 2500)
+    }, 1500) // Reduced from 2500ms to 1500ms
 
     return () => clearTimeout(timer)
   }, [])

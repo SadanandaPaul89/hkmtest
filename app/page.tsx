@@ -1,14 +1,25 @@
 "use client"
 
+import dynamic from "next/dynamic"
 import HeroSection from "@/components/HeroSection"
-import FooterSection from "@/components/FooterSection"
 import NavbarDemo from "@/components/resizable-navbar-demo"
-import ImageCardsSection from "@/components/ImageCardsSection"
-import ActivitiesShowcase from "@/components/ActivitiesShowcase"
-import ExplorationSection from "@/components/ExplorationSection"
 import Loader from "@/components/Loader"
 import { NavigationLoaderProvider } from "@/components/NavigationLoader"
 import { AnimatePresence } from "framer-motion"
+
+// Lazy load below-the-fold components
+const ExplorationSection = dynamic(() => import("@/components/ExplorationSection"), {
+  loading: () => <div className="h-[600px] bg-slate-900" />
+})
+const ImageCardsSection = dynamic(() => import("@/components/ImageCardsSection"), {
+  loading: () => <div className="h-[500px] bg-white" />
+})
+const ActivitiesShowcase = dynamic(() => import("@/components/ActivitiesShowcase"), {
+  loading: () => <div className="h-[500px] bg-slate-50" />
+})
+const FooterSection = dynamic(() => import("@/components/FooterSection"), {
+  loading: () => <div className="h-[400px] bg-slate-900" />
+})
 
 export default function HomePage() {
   return (
@@ -17,71 +28,78 @@ export default function HomePage() {
         <Loader />
       </AnimatePresence>
       <div className="min-h-screen bg-white text-slate-800 overflow-x-hidden max-w-full relative">
-        {/* Mandala pattern backgrounds - Comprehensive coverage */}
+        {/* Mandala pattern backgrounds - Optimized with fewer patterns */}
         <div className="fixed inset-0 pointer-events-none z-0">
-          {/* Hero Section - Top area */}
+          {/* Top area - reduced to 2 patterns */}
           <div className="absolute -top-32 -left-32 w-[500px] h-[500px] opacity-6">
-            <img src="/assets/BlackWhiteMandalaPattern1.jpg" alt="" className="w-full h-full object-contain rotate-45 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
-          </div>
-          <div className="absolute top-10 left-20 w-[280px] h-[280px] opacity-4">
-            <img src="/assets/BlackWhiteMandalaPattern7.jpg" alt="" className="w-full h-full object-contain rotate-12 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
+            <img 
+              src="/assets/BlackWhiteMandalaPattern1.jpg" 
+              alt="" 
+              loading="lazy" 
+              width="500" 
+              height="500"
+              className="w-full h-full object-contain rotate-45 mix-blend-multiply" 
+              style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} 
+            />
           </div>
           <div className="absolute top-20 -right-40 w-[450px] h-[450px] opacity-5">
-            <img src="/assets/BlackWhiteMandalaPattern2.jpg" alt="" className="w-full h-full object-contain -rotate-12 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
-          </div>
-          <div className="absolute top-60 right-10 w-[250px] h-[250px] opacity-5">
-            <img src="/assets/BlackWhiteMandalaPattern8.jpg" alt="" className="w-full h-full object-contain rotate-90 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
-          </div>
-          <div className="absolute top-40 left-[40%] w-[200px] h-[200px] opacity-3">
-            <img src="/assets/BlackWhiteMandalaPattern9.jpg" alt="" className="w-full h-full object-contain rotate-30 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
-          </div>
-          
-          {/* ImageCards Section area */}
-          <div className="absolute top-[30%] -left-32 w-[400px] h-[400px] opacity-4">
-            <img src="/assets/BlackWhiteMandalaPattern3.jpg" alt="" className="w-full h-full object-contain rotate-90 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
-          </div>
-          <div className="absolute top-[35%] left-16 w-[220px] h-[220px] opacity-3">
-            <img src="/assets/BlackWhiteMandalaPattern10.jpg" alt="" className="w-full h-full object-contain -rotate-30 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
-          </div>
-          <div className="absolute top-[32%] -right-36 w-[380px] h-[380px] opacity-5">
-            <img src="/assets/BlackWhiteMandalaPattern4.jpg" alt="" className="w-full h-full object-contain rotate-180 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
-          </div>
-          <div className="absolute top-[38%] right-20 w-[240px] h-[240px] opacity-4">
-            <img src="/assets/BlackWhiteMandalaPattern11.jpg" alt="" className="w-full h-full object-contain rotate-45 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
+            <img 
+              src="/assets/BlackWhiteMandalaPattern2.jpg" 
+              alt="" 
+              loading="lazy" 
+              width="450" 
+              height="450"
+              className="w-full h-full object-contain -rotate-12 mix-blend-multiply" 
+              style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} 
+            />
           </div>
           
-          {/* Activities Section area */}
-          <div className="absolute top-[60%] -left-28 w-[420px] h-[420px] opacity-5">
-            <img src="/assets/BlackWhiteMandalaPattern5.jpg" alt="" className="w-full h-full object-contain -rotate-45 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
+          {/* Middle area - reduced to 2 patterns */}
+          <div className="absolute top-[40%] -left-32 w-[400px] h-[400px] opacity-4">
+            <img 
+              src="/assets/BlackWhiteMandalaPattern3.jpg" 
+              alt="" 
+              loading="lazy" 
+              width="400" 
+              height="400"
+              className="w-full h-full object-contain rotate-90 mix-blend-multiply" 
+              style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} 
+            />
           </div>
-          <div className="absolute top-[65%] left-24 w-[230px] h-[230px] opacity-4">
-            <img src="/assets/BlackWhiteMandalaPattern12.jpg" alt="" className="w-full h-full object-contain rotate-60 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
-          </div>
-          <div className="absolute top-[62%] -right-32 w-[400px] h-[400px] opacity-6">
-            <img src="/assets/BlackWhiteMandalaPattern6.jpg" alt="" className="w-full h-full object-contain rotate-15 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
-          </div>
-          <div className="absolute top-[68%] right-16 w-[260px] h-[260px] opacity-4">
-            <img src="/assets/BlackWhiteMandalaPattern13.jpg" alt="" className="w-full h-full object-contain -rotate-75 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
-          </div>
-          <div className="absolute top-[64%] left-[45%] w-[190px] h-[190px] opacity-3">
-            <img src="/assets/BlackWhiteMandalaPattern14.jpg" alt="" className="w-full h-full object-contain rotate-120 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
+          <div className="absolute top-[40%] -right-36 w-[380px] h-[380px] opacity-5">
+            <img 
+              src="/assets/BlackWhiteMandalaPattern4.jpg" 
+              alt="" 
+              loading="lazy" 
+              width="380" 
+              height="380"
+              className="w-full h-full object-contain rotate-180 mix-blend-multiply" 
+              style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} 
+            />
           </div>
           
-          {/* Footer Section area */}
+          {/* Bottom area - reduced to 2 patterns */}
           <div className="absolute bottom-32 -left-24 w-[450px] h-[450px] opacity-6">
-            <img src="/assets/BlackWhiteMandalaPattern10.jpg" alt="" className="w-full h-full object-contain -rotate-20 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
-          </div>
-          <div className="absolute bottom-10 left-32 w-[220px] h-[220px] opacity-4">
-            <img src="/assets/BlackWhiteMandalaPattern11.jpg" alt="" className="w-full h-full object-contain rotate-80 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
+            <img 
+              src="/assets/BlackWhiteMandalaPattern5.jpg" 
+              alt="" 
+              loading="lazy" 
+              width="450" 
+              height="450"
+              className="w-full h-full object-contain -rotate-20 mix-blend-multiply" 
+              style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} 
+            />
           </div>
           <div className="absolute -bottom-32 -right-32 w-[480px] h-[480px] opacity-5">
-            <img src="/assets/BlackWhiteMandalaPattern1.jpg" alt="" className="w-full h-full object-contain rotate-12 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
-          </div>
-          <div className="absolute bottom-20 right-24 w-[270px] h-[270px] opacity-5">
-            <img src="/assets/BlackWhiteMandalaPattern2.jpg" alt="" className="w-full h-full object-contain -rotate-35 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
-          </div>
-          <div className="absolute bottom-40 left-[40%] w-[200px] h-[200px] opacity-3">
-            <img src="/assets/BlackWhiteMandalaPattern3.jpg" alt="" className="w-full h-full object-contain rotate-150 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
+            <img 
+              src="/assets/BlackWhiteMandalaPattern6.jpg" 
+              alt="" 
+              loading="lazy" 
+              width="480" 
+              height="480"
+              className="w-full h-full object-contain rotate-12 mix-blend-multiply" 
+              style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} 
+            />
           </div>
         </div>
         

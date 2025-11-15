@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 
 const videos = [
   { type: "cloudinary", id: "Temple-Darshan-1_nutfl3", cloudName: "dmyzn29mc" },
@@ -12,6 +12,16 @@ const videos = [
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [loadedVideos, setLoadedVideos] = useState<Set<number>>(new Set([0]))
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
+
+  // Preload next video when slide changes
+  useEffect(() => {
+    const nextIndex = (currentSlide + 1) % videos.length
+    if (!loadedVideos.has(nextIndex)) {
+      setLoadedVideos(prev => new Set(prev).add(nextIndex))
+    }
+  }, [currentSlide, loadedVideos])
 
   return (
     <div className="relative h-screen w-screen max-w-full overflow-hidden pb-16 md:pb-0">
@@ -27,34 +37,41 @@ export default function HeroSection() {
             <div className="relative w-full h-full bg-slate-900 overflow-hidden">
               {/* Render Cloudinary or YouTube video */}
               {video.type === "cloudinary" ? (
-                <video
-                  className="absolute pointer-events-none object-cover"
-                  style={{
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    objectPosition: '80% 50%', // Change to 'center top', 'center bottom', or '50% 30%' for custom
-                  }}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="auto"
-                >
-                  <source
-                    src={`https://res.cloudinary.com/${video.cloudName}/video/upload/ar_3:4,c_fill/${video.id}.mp4`}
-                    type="video/mp4"
-                    media="(max-width: 768px)"
-                  />
-                  <source
-                    src={`https://res.cloudinary.com/${video.cloudName}/video/upload/${video.id}.mp4`}
-                    type="video/mp4"
-                  />
-                  Your browser does not support the video tag.
-                </video>
+                loadedVideos.has(idx) ? (
+                  <video
+                    ref={(el) => {
+                      videoRefs.current[idx] = el
+                    }}
+                    className="absolute pointer-events-none object-cover"
+                    style={{
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: '80% 50%',
+                    }}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload={idx === 0 ? "auto" : "metadata"}
+                  >
+                    <source
+                      src={`https://res.cloudinary.com/${video.cloudName}/video/upload/ar_3:4,c_fill,q_auto:low/${video.id}.mp4`}
+                      type="video/mp4"
+                      media="(max-width: 768px)"
+                    />
+                    <source
+                      src={`https://res.cloudinary.com/${video.cloudName}/video/upload/q_auto:good/${video.id}.mp4`}
+                      type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  <div className="absolute inset-0 bg-slate-900" />
+                )
               ) : (
                 <iframe
                   className="absolute pointer-events-none"
