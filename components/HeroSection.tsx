@@ -1,32 +1,22 @@
 "use client"
 
-import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useState } from "react"
-import { motion } from "framer-motion"
 
 const videos = [
   { type: "cloudinary", id: "Temple-Darshan-1_nutfl3", cloudName: "dmyzn29mc" },
   { type: "youtube", id: "bJsaR9-h26Y" },
   { type: "cloudinary", id: "Sri_Krishna_Janmashtami_2025_Highlights___HKM_Chennai_Grand_Celebrations_1_ohsc8z", cloudName: "dmyzn29mc" },
   { type: "cloudinary", id: "Sri_Krishna_Janmashtami_2025_Highlights___HKM_Chennai_Grand_Celebrations_1_ohsc8z", cloudName: "dmyzn29mc" },
-  { type: "youtube", id: "dQw4w9WgXcQ" }
+  { type: "cloudinary", id: "Sri_Krishna_Janmashtami_2025_Highlights___HKM_Chennai_Grand_Celebrations_1_ohsc8z", cloudName: "dmyzn29mc" }
 ]
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % videos.length)
-  }
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + videos.length) % videos.length)
-  }
-
   return (
-    <div className="relative h-screen w-screen max-w-full overflow-hidden">
+    <div className="relative h-screen w-screen max-w-full overflow-hidden pb-16 md:pb-0">
       {/* Background Videos */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
+      <div className="absolute inset-0 w-full overflow-hidden h-full md:h-full">
         {videos.map((video, idx) => (
           <div
             key={`video-${idx}`}
@@ -38,7 +28,7 @@ export default function HeroSection() {
               {/* Render Cloudinary or YouTube video */}
               {video.type === "cloudinary" ? (
                 <video
-                  className="absolute pointer-events-none"
+                  className="absolute pointer-events-none object-cover"
                   style={{
                     top: '50%',
                     left: '50%',
@@ -46,6 +36,7 @@ export default function HeroSection() {
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
+                    objectPosition: '80% 50%', // Change to 'center top', 'center bottom', or '50% 30%' for custom
                   }}
                   autoPlay
                   loop
@@ -53,6 +44,11 @@ export default function HeroSection() {
                   playsInline
                   preload="auto"
                 >
+                  <source
+                    src={`https://res.cloudinary.com/${video.cloudName}/video/upload/ar_3:4,c_fill/${video.id}.mp4`}
+                    type="video/mp4"
+                    media="(max-width: 768px)"
+                  />
                   <source
                     src={`https://res.cloudinary.com/${video.cloudName}/video/upload/${video.id}.mp4`}
                     type="video/mp4"
@@ -63,7 +59,7 @@ export default function HeroSection() {
                 <iframe
                   className="absolute pointer-events-none"
                   style={{
-                    top: '50%',
+                    top: '50%', // Change to '30%', '40%', '60%', '70%' to shift vertical position
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
                     width: '300vw',
@@ -82,47 +78,12 @@ export default function HeroSection() {
         ))}
       </div>
 
-      {/* Navigation controls (arrows) */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3 rounded-full bg-white/90 hover:bg-white shadow-lg transition-all"
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#1B7CB8]" />
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3 rounded-full bg-white/90 hover:bg-white shadow-lg transition-all"
-        aria-label="Next slide"
-      >
-        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#1B7CB8]" />
-      </button>
-
-      {/* Bottom navigation with text labels */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/90 via-black/70 to-transparent backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-8 py-4 sm:py-5 md:py-6">
-          {/* Mobile: Hidden */}
-          <div className="hidden sm:flex justify-center gap-1">
-            {[0, 1, 2, 3, 4].map((id) => (
-              <button
-                key={id}
-                onClick={() => setCurrentSlide(id)}
-                style={{
-                  width: currentSlide === id ? '12px' : '4px',
-                  height: '4px',
-                }}
-                className={`rounded-full transition-all duration-300 ${
-                  currentSlide === id
-                    ? "bg-[#FFB81C]"
-                    : "bg-white/40"
-                }`}
-                aria-label={`Slide ${id + 1}`}
-              />
-            ))}
-          </div>
-
-          {/* Tablet & Desktop: Text labels */}
-          <div className="hidden sm:flex items-center justify-center gap-0.5 md:gap-1 overflow-x-auto scrollbar-hide">
+      {/* Bottom navigation with text labels - positioned above video */}
+      {/* Change md:bottom-4 to adjust desktop position: md:bottom-8, md:bottom-12, md:bottom-16, md:bottom-20, etc. */}
+      <div className="absolute bottom-10 md:bottom-0 left-0 right-0 z-30 bg-gradient-to-t from-black/40 via-black/20 to-transparent">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-8">
+          {/* Mobile & Tablet & Desktop: Text labels */}
+          <div className="flex items-center justify-start md:justify-center gap-0 sm:gap-0.5 md:gap-1 overflow-x-auto scrollbar-hide">
             {[
               { label: "Temple Darshan", id: 0 },
               { label: "Spiritual Programs", id: 1 },
@@ -133,7 +94,7 @@ export default function HeroSection() {
               <div key={item.id} className="flex items-center flex-shrink-0">
                 <button
                   onClick={() => setCurrentSlide(item.id)}
-                  className={`px-3 sm:px-4 md:px-6 py-2 md:py-3 text-xs sm:text-sm font-medium transition-all duration-300 hover:text-[#FFB81C] whitespace-nowrap ${
+                  className={`px-2 sm:px-4 md:px-6 py-6.5 sm:py-2 md:py-0.0 text-[10px] sm:text-sm md:text-base font-medium transition-all duration-300 hover:text-[#FFB81C] whitespace-nowrap ${
                     currentSlide === item.id
                       ? "text-[#FFB81C]"
                       : "text-white/80"
@@ -143,7 +104,7 @@ export default function HeroSection() {
                   {item.label}
                 </button>
                 {index < 4 && (
-                  <div className="h-5 md:h-6 w-px bg-white/20" />
+                  <div className="h-4 sm:h-5 md:h-6 w-px bg-white/20" />
                 )}
               </div>
             ))}

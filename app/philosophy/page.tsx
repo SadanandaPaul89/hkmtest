@@ -40,8 +40,19 @@ const philosophyContent = [
 
 export default function PhilosophyPage() {
   return (
-    <div className="min-h-screen bg-[#FFF9F0] text-[#3A3A3A]">
-      <NavbarDemo />
+    <div className="min-h-screen bg-white text-[#3A3A3A] relative overflow-hidden">
+      {/* Mandala pattern backgrounds */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-20 right-10 w-[400px] h-[400px] opacity-4">
+          <img src="/assets/BlackWhiteMandalaPattern3.jpg" alt="" className="w-full h-full object-contain rotate-45 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
+        </div>
+        <div className="absolute bottom-20 left-10 w-[350px] h-[350px] opacity-3">
+          <img src="/assets/BlackWhiteMandalaPattern4.jpg" alt="" className="w-full h-full object-contain -rotate-30 mix-blend-multiply" style={{ maskImage: 'radial-gradient(circle, black 40%, transparent 70%)' }} />
+        </div>
+      </div>
+      
+      <div className="relative z-10">
+        <NavbarDemo />
 
       {/* Hero Section */}
       <section
@@ -79,15 +90,23 @@ export default function PhilosophyPage() {
       </section>
 
       {/* Main Content */}
-      <section className="max-w-7xl mx-auto px-4 md:px-8 py-16">
-        <h2 className="text-6xl font-bold text-center mb-16 text-[#3A3A3A]">PHILOSOPHY</h2>
+      <section className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16">
+        {/* Page Title with decorative elements */}
+        <div className="text-center mb-12 md:mb-16">
+          <div className="inline-block">
+            <h2 className="text-4xl md:text-6xl font-bold text-[#1B7CB8] mb-2">PHILOSOPHY</h2>
+            <div className="h-1 bg-gradient-to-r from-transparent via-[#FFB81C] to-transparent"></div>
+          </div>
+          <p className="text-lg text-[#666666] mt-4">Acintya-Bhedabheda-Tattva</p>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main content area */}
-          <div className="lg:col-span-2">
-            <div className="relative bg-white rounded-lg p-8 border border-[#E5E5E5]">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Main content area - Takes 3 columns */}
+          <div className="lg:col-span-3">
+            {/* Philosophy Content - Premium Typography */}
+            <div className="bg-white rounded-2xl p-6 md:p-10 shadow-lg border border-gray-100 relative overflow-hidden">
               {/* Om symbol watermark */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
+              <div className="absolute inset-0 flex items-center justify-center opacity-3 pointer-events-none">
                 <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <text
                     x="200"
@@ -103,48 +122,88 @@ export default function PhilosophyPage() {
                 </svg>
               </div>
 
+              <h3 className="text-2xl md:text-3xl font-bold text-[#1B7CB8] mb-8 pb-4 border-b-2 border-[#FFB81C]/30 relative z-10">
+                Simultaneous Oneness and Difference
+              </h3>
+              
               {/* Text content */}
-              <div className="relative z-10 space-y-6">
+              <div className="relative z-10 space-y-6 text-[#444444]">
                 {philosophyContent.map((paragraph, idx) => (
-                  <p key={idx} className="text-[#666666] leading-relaxed text-justify">
+                  <p 
+                    key={idx} 
+                    className="text-base md:text-lg leading-relaxed"
+                    style={{ textAlign: 'justify', textJustify: 'inter-word' }}
+                  >
                     {paragraph}
                   </p>
                 ))}
               </div>
+              
+              {/* Quote Section */}
+              <div className="mt-12 p-6 md:p-8 bg-gradient-to-r from-[#1B7CB8]/5 to-[#FFB81C]/5 rounded-xl border-l-4 border-[#1B7CB8] relative z-10">
+                <p className="text-lg md:text-xl text-[#1B7CB8] leading-relaxed" style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontStyle: 'italic', fontWeight: '500' }}>
+                  "The Supreme Lord is one, and His expansions are various. He is therefore the Supersoul of everything."
+                </p>
+                <p className="text-sm text-[#666666] mt-3" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>— Vedic Philosophy</p>
+              </div>
             </div>
           </div>
 
-          {/* Sidebar */}
-          <div className="space-y-8">
-            {/* Activities Section */}
-            <div className="bg-white rounded-lg p-6 border-l-4 border-[#FFB81C]">
-              <h4 className="text-xl font-bold mb-4 text-[#1B7CB8]">ACTIVITIES</h4>
-              <div className="space-y-3">
-                {activities.map((activity, idx) => (
-                  <Link
-                    key={idx}
-                    href={activity.link}
-                    className="block text-sm font-medium text-[#1B7CB8] hover:text-[#E8725C] transition-colors py-2 px-3 rounded hover:bg-[#FFF9F0]"
-                  >
-                    {activity.name}
-                  </Link>
-                ))}
+          {/* Sidebar - Takes 1 column */}
+          <div className="space-y-6">
+            {/* Activities Card */}
+            <div className="relative overflow-hidden rounded-xl bg-gradient-to-b from-orange-50 to-white border-2 border-[#FFB81C]/30 p-6 shadow-lg sticky top-24">
+              <div className="absolute top-0 right-0 w-20 h-20 opacity-5">
+                <svg viewBox="0 0 100 100" className="w-full h-full">
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="1"/>
+                  <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="1"/>
+                  <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="1"/>
+                </svg>
+              </div>
+              
+              <div className="relative">
+                <div className="mb-4 pb-3 border-b-2 border-[#FFB81C]/20">
+                  <h4 className="text-xl font-bold text-[#1B7CB8] tracking-wide">ACTIVITIES</h4>
+                </div>
+                
+                <div className="space-y-1">
+                  {activities.map((activity, idx) => (
+                    <Link
+                      key={idx}
+                      href={activity.link}
+                      className="group flex items-center gap-2 py-2 px-3 rounded-md hover:bg-orange-50/50 transition-all duration-200 border-l-2 border-transparent hover:border-[#FFB81C]"
+                    >
+                      <span className="text-[#FFB81C] text-sm">•</span>
+                      <span className="text-xs font-medium text-[#3A3A3A] group-hover:text-[#1B7CB8] transition-colors flex-1 leading-tight">
+                        {activity.name}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Festivals Section */}
-            <div className="bg-white rounded-lg p-6 border-l-4 border-[#E8725C]">
-              <h4 className="text-xl font-bold mb-4 text-[#1B7CB8]">FESTIVALS</h4>
-              <div className="space-y-2">
-                {festivals.map((festival, idx) => (
-                  <Link
-                    key={idx}
-                    href={festival.link}
-                    className="block text-sm font-medium text-[#1B7CB8] hover:text-[#E8725C] transition-colors py-2 px-3 rounded hover:bg-[#FFF9F0]"
-                  >
-                    {festival.name}
-                  </Link>
-                ))}
+            {/* Festivals Card */}
+            <div className="relative overflow-hidden rounded-xl bg-gradient-to-b from-red-50 to-white border-2 border-[#E8725C]/30 p-6 shadow-lg">
+              <div className="relative">
+                <div className="mb-4 pb-3 border-b-2 border-[#E8725C]/20">
+                  <h4 className="text-xl font-bold text-[#1B7CB8] tracking-wide">FESTIVALS</h4>
+                </div>
+                
+                <div className="space-y-1">
+                  {festivals.map((festival, idx) => (
+                    <Link
+                      key={idx}
+                      href={festival.link}
+                      className="group flex items-center gap-2 py-2 px-3 rounded-md hover:bg-red-50/50 transition-all duration-200 border-l-2 border-transparent hover:border-[#E8725C]"
+                    >
+                      <span className="text-[#E8725C] text-sm">•</span>
+                      <span className="text-xs font-medium text-[#3A3A3A] group-hover:text-[#1B7CB8] transition-colors flex-1 leading-tight">
+                        {festival.name}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -152,6 +211,7 @@ export default function PhilosophyPage() {
       </section>
 
       <FooterSection />
+      </div>
     </div>
   )
 }

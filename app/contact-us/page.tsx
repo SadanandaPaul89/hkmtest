@@ -57,8 +57,8 @@ export default function ContactUsPage() {
         <div className="relative max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="text-white">
-              <h1 className="text-5xl md:text-6xl font-bold mb-4 text-balance">DAKṢIṆA DVĀRAKĀ DHĀMA</h1>
-              <p className="text-2xl md:text-3xl font-light mb-6">
+              <h1 className="text-5xl md:text-6xl font-bold mb-4 text-balance !text-white">DAKṢIṆA DVĀRAKĀ DHĀMA</h1>
+              <p className="text-2xl md:text-3xl font-light mb-6 !text-white">
                 Cultural Complex to promote and preserve Indian heritage
               </p>
             </div>

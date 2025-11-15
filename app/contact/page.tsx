@@ -23,7 +23,7 @@ export default function ContactPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative max-w-6xl mx-auto text-center text-white"
+          className="relative max-w-6xl mx-auto text-center text-white "
         >
           <h1 className="heading-1 mb-6 text-balance text-white">Contact Us</h1>
           <p className="body-large text-gray-100">We'd Love to Hear From You</p>

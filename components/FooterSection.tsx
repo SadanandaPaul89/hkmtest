@@ -9,9 +9,38 @@ export default function FooterSection() {
   }
 
   return (
-    <footer className="relative z-10 py-3 sm:py-12 md:py-20 px-4 sm:px-6 bg-slate-100 pattern-waves">
-      <div className="max-w-7xl mx-auto">
-        <div className="rounded-xl sm:rounded-3xl bg-gradient-to-br from-[#1B7CB8] to-[#156399] p-2.5 sm:p-6 md:p-10 shadow-xl backdrop-blur-sm">
+    <footer className="relative z-10 py-3 sm:py-12 md:py-20 px-4 sm:px-6 bg-slate-100 overflow-hidden">
+      {/* Mandala pattern backgrounds in footer */}
+      <div className="absolute top-0 left-0 w-64 h-64 opacity-6 pointer-events-none">
+        <img src="/assets/BlackWhiteMandalaPattern1.jpg" alt="" className="w-full h-full object-contain rotate-45" />
+      </div>
+      <div className="absolute bottom-0 right-0 w-72 h-72 opacity-5 pointer-events-none">
+        <img src="/assets/BlackWhiteMandalaPattern2.jpg" alt="" className="w-full h-full object-contain -rotate-30" />
+      </div>
+      <div className="absolute top-1/2 left-1/3 w-48 h-48 opacity-3 pointer-events-none">
+        <img src="/assets/BlackWhiteMandalaPattern3.jpg" alt="" className="w-full h-full object-contain rotate-90" />
+      </div>
+      
+      {/* Peacock feather decorations in footer */}
+      <div className="absolute top-10 right-10 w-40 h-40 opacity-8 rotate-45 pointer-events-none">
+        <img src="/assets/peacock-feather.jpg" alt="" className="w-full h-full object-cover rounded-full blur-sm" />
+      </div>
+      <div className="absolute bottom-10 left-10 w-32 h-32 opacity-6 -rotate-30 pointer-events-none">
+        <img src="/assets/peacock-feather.jpg" alt="" className="w-full h-full object-cover rounded-full blur-[2px]" />
+      </div>
+      <div className="absolute top-1/2 left-1/4 w-24 h-24 opacity-5 rotate-90 pointer-events-none">
+        <img src="/assets/peacock-feather.jpg" alt="" className="w-full h-full object-cover rounded-full blur-[3px]" />
+      </div>
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="rounded-xl sm:rounded-3xl bg-gradient-to-br from-[#1B7CB8] to-[#156399] p-2.5 sm:p-6 md:p-10 shadow-xl backdrop-blur-sm relative overflow-hidden">
+          {/* Peacock feathers inside footer card */}
+          <div className="absolute top-5 right-5 w-28 h-28 opacity-10 rotate-12 pointer-events-none">
+            <img src="/assets/peacock-feather.jpg" alt="" className="w-full h-full object-cover rounded-full" />
+          </div>
+          <div className="absolute bottom-5 left-5 w-20 h-20 opacity-8 -rotate-45 pointer-events-none">
+            <img src="/assets/peacock-feather.jpg" alt="" className="w-full h-full object-cover rounded-full blur-sm" />
+          </div>
           
           {/* Mobile Compact Layout */}
           <div className="md:hidden">

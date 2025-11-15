@@ -127,6 +127,15 @@ export default function ActivitiesShowcase() {
 
   return (
     <section className="relative py-12 sm:py-16 md:py-24 bg-gradient-to-br from-slate-50 via-white to-slate-100 overflow-hidden">
+      {/* Mandala pattern backgrounds */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 right-10 w-72 h-72 opacity-4">
+          <img src="/assets/BlackWhiteMandalaPattern3.jpg" alt="" className="w-full h-full object-contain rotate-12" />
+        </div>
+        <div className="absolute bottom-20 left-10 w-64 h-64 opacity-3">
+          <img src="/assets/BlackWhiteMandalaPattern4.jpg" alt="" className="w-full h-full object-contain -rotate-45" />
+        </div>
+      </div>
       {/* Section Header */}
       <div className="text-center mb-8 sm:mb-10 md:mb-12 px-4">
         <motion.h2

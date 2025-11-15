@@ -10,14 +10,14 @@ const cards = [
     id: 1,
     title: "Magazine",
     description: "Vaikuntha Varthai is a quarterly newsletter published by HKMC",
-    image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2070&auto=format&fit=crop",
+    image: "/assets/Magazine-pic.jpg",
     url: "/magazine",
   },
   {
     id: 2,
     title: "Activities",
     description: "Activities including Spiritual Discourses, Youth Empowerment, Distribution of Spiritual Knowledge",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2020&auto=format&fit=crop",
+    image: "/assets/activities-pic.JPG",
     url: "/activities",
   },
   {
@@ -31,7 +31,7 @@ const cards = [
     id: 4,
     title: "Lectures",
     description: "The enlighten Spiritual Discourses for Srimad Bhagavad-Gita and Bhagavatam",
-    image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=2070&auto=format&fit=crop",
+    image: "/assets/Lecture-pic.JPG",
     url: "/lectures",
   },
 ]
@@ -40,7 +40,16 @@ export default function ImageCardsSection() {
   const [activeCard, setActiveCard] = useState<number | null>(null)
 
   return (
-    <section className="relative z-10 py-8 sm:py-12 md:py-16 bg-white">
+    <section className="relative z-10 py-8 sm:py-12 md:py-16 bg-white overflow-x-hidden overflow-y-hidden">
+      {/* Mandala pattern backgrounds */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-10 left-10 w-60 h-60 opacity-3">
+          <img src="/assets/BlackWhiteMandalaPattern5.jpg" alt="" className="w-full h-full object-contain rotate-90" />
+        </div>
+        <div className="absolute bottom-10 right-10 w-52 h-52 opacity-4">
+          <img src="/assets/BlackWhiteMandalaPattern6.jpg" alt="" className="w-full h-full object-contain -rotate-12" />
+        </div>
+      </div>
       <div className="max-w-7xl mx-auto">
         {/* Section Title */}
         <motion.div
@@ -57,7 +66,7 @@ export default function ImageCardsSection() {
         </motion.div>
 
         {/* Mobile: Horizontal scroll, Tablet: 2 cols, Desktop: 4 cols */}
-        <div className="flex overflow-x-auto gap-4 px-4 sm:px-6 pb-4 snap-x snap-mandatory scrollbar-hide sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 sm:overflow-visible">
+        <div className="flex overflow-x-auto overflow-y-hidden gap-4 px-4 sm:px-6 pb-4 snap-x snap-mandatory scrollbar-hide sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 sm:overflow-visible">
           {cards.map((card, index) => (
             <motion.div
               key={card.id}

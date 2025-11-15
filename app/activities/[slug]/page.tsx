@@ -152,8 +152,8 @@ export default function ActivityPage({ params }: { params: { slug: string } }) {
       >
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative max-w-6xl mx-auto text-center text-white">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-balance">{activity.name}</h1>
-          <p className="text-xl md:text-2xl text-gray-100">{activity.description}</p>
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-balance text-white">{activity.name}</h1>
+          <p className="text-xl md:text-2xl text-white">{activity.description}</p>
         </div>
       </section>
 

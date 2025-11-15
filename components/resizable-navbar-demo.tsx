@@ -65,7 +65,7 @@ export default function NavbarDemo() {
             <NavbarButton
               as="button"
               variant="primary"
-              className="bg-[#1B7CB8] text-white hover:bg-[#156399] shadow-[0_4px_14px_0_rgba(27,124,184,0.4)] hover:shadow-[0_6px_20px_0_rgba(27,124,184,0.6)] transition-all duration-200 text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-2.5"
+              className="bg-white text-[#1B7CB8] hover:bg-gray-50 shadow-lg hover:shadow-xl transition-all duration-200 text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-semibold border-2 border-white"
               onClick={() => router.push("/donate")}
             >
               <span className="hidden sm:inline">DONATE NOW</span>
@@ -78,7 +78,15 @@ export default function NavbarDemo() {
       <MobileNav>
         <MobileNavHeader>
           <CustomNavbarLogo />
-          <MobileNavToggle isOpen={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => router.push("/donate")}
+              className="bg-white text-[#1B7CB8] hover:bg-gray-50 shadow-lg transition-all duration-200 text-xs px-3 py-1.5 rounded-full font-semibold border-2 border-white"
+            >
+              DONATE
+            </button>
+            <MobileNavToggle isOpen={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+          </div>
         </MobileNavHeader>
 
         <MobileNavMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)}>
@@ -125,7 +133,7 @@ export default function NavbarDemo() {
             <NavbarButton
               as="button"
               variant="primary"
-              className="w-full bg-[#1B7CB8] text-white hover:bg-[#156399] shadow-[0_4px_14px_0_rgba(27,124,184,0.4)] hover:shadow-[0_6px_20px_0_rgba(27,124,184,0.6)] transition-all duration-200"
+              className="w-full bg-white text-[#1B7CB8] hover:bg-gray-50 shadow-lg hover:shadow-xl transition-all duration-200 rounded-full font-semibold border-2 border-white"
               onClick={() => {
                 router.push("/donate")
                 setIsMobileMenuOpen(false)

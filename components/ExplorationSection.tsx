@@ -110,7 +110,24 @@ export default function ExplorationSection() {
   }
 
   return (
-    <section className="relative py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-b from-slate-900 to-slate-800 overflow-hidden">
+    <section className="relative -mt-12 md:mt-0 py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-b from-slate-900 to-slate-800 overflow-hidden">
+      {/* Temple pattern background - Full coverage */}
+      <div className="absolute inset-0 pointer-events-none">
+        <img 
+          src="/assets/temple-pattern.PNG" 
+          alt="" 
+          className="w-full h-full object-cover opacity-25 mix-blend-overlay"
+        />
+      </div>
+      
+      {/* Additional temple pattern layer for depth */}
+      <div className="absolute inset-0 pointer-events-none">
+        <img 
+          src="/assets/temple-pattern.PNG" 
+          alt="" 
+          className="w-full h-full object-cover opacity-8 mix-blend-soft-light scale-410"
+        />
+      </div>
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-pattern-lotus" />
